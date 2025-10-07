@@ -75,7 +75,7 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 4.10 Write tests for reset password page in `app/(auth)/reset-password/__tests__/page.test.tsx`
   - [x] 4.11 Write tests for callback route in `app/(auth)/auth/callback/__tests__/route.test.ts`
 
-- [ ] 5.0 Implement Route Protection and Middleware
+- [x] 5.0 Implement Route Protection and Middleware
   - [x] 5.1 Create `middleware.ts` at project root to check authentication status
   - [x] 5.2 Implement redirect logic: unauthenticated users to /login, unverified users to /verify
   - [x] 5.3 Define public routes (login, signup, verify, reset-password, auth callback)
@@ -84,22 +84,22 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 5.6 Test middleware by accessing protected and public routes
 
 - [ ] 6.0 Build User Profile Management
-  - [ ] 6.1 Create `app/(protected)` route group directory
-  - [ ] 6.2 Create `app/(protected)/layout.tsx` wrapper for authenticated routes
-  - [ ] 6.3 Create `app/(protected)/profile/page.tsx` with profile view and edit forms
-  - [ ] 6.4 Implement profile name update functionality
-  - [ ] 6.5 Implement avatar URL update functionality
-  - [ ] 6.6 Implement password change functionality with validation
-  - [ ] 6.7 Implement email change functionality with rate limiting (once per 24 hours)
-  - [ ] 6.8 Implement soft account deletion with confirmation dialog
-  - [ ] 6.9 Add logout functionality
-  - [ ] 6.10 Write tests for profile page in `app/(protected)/profile/__tests__/page.test.tsx`
-  - [ ] 6.11 Update `app/page.tsx` to redirect authenticated users or show appropriate content
+  - [x] 6.1 Create `app/(protected)` route group directory
+  - [x] 6.2 Create `app/(protected)/layout.tsx` wrapper for authenticated routes
+  - [x] 6.3 Create `app/(protected)/profile/page.tsx` with profile view and edit forms
+  - [x] 6.4 Implement profile name update functionality
+  - [x] 6.5 Implement avatar URL update functionality
+  - [x] 6.6 Implement password change functionality with validation
+  - [x] 6.7 Implement email change functionality with rate limiting (once per 24 hours)
+  - [x] 6.8 Implement soft account deletion with confirmation dialog
+  - [x] 6.9 Add logout functionality
+  - [x] 6.10 Write tests for profile page in `app/(protected)/profile/__tests__/page.test.tsx`
+  - [x] 6.11 Update `app/page.tsx` to redirect authenticated users or show appropriate content
 
 - [ ] 7.0 Testing and Validation
-  - [ ] 7.1 Run full test suite with `npm run test`
-  - [ ] 7.2 Fix any failing tests
-  - [ ] 7.3 Run `npm run lint` and fix any linting errors
+  - [x] 7.1 Run full test suite with `npm run test`
+  - [x] 7.2 Fix any failing tests
+  - [x] 7.3 Run `npm run lint` and fix any linting errors
   - [ ] 7.4 Run `npm run build` to ensure production build succeeds
   - [ ] 7.5 Manually test complete signup flow (email/password)
   - [ ] 7.6 Manually test magic link login flow
