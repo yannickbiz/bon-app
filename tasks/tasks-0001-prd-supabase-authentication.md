@@ -36,16 +36,16 @@ Based on PRD: `0001-prd-supabase-authentication.md`
 
 ## Tasks
 
-- [ ] 0.0 Create Feature Branch
+- [x] 0.0 Create Feature Branch
   - [x] 0.1 Create a new branch named `feature/supabase-auth` from main
   - [x] 0.2 Push the branch to remote repository
 
 - [ ] 1.0 Setup Supabase Integration and Configuration
-  - [ ] 1.1 Install `@supabase/ssr` package
-  - [ ] 1.2 Create `.env.local` file with Supabase credentials (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY)
-  - [ ] 1.3 Create `.env.example` file with placeholder environment variables
-  - [ ] 1.4 Add `.env.local` to `.gitignore` if not already present
-  - [ ] 1.5 Update Supabase dashboard: enable email auth, configure redirect URLs, and set site URL
+  - [x] 1.1 Install `@supabase/ssr` package
+  - [x] 1.2 Create `.env.local` file with Supabase credentials (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY)
+  - [x] 1.3 Create `.env.example` file with placeholder environment variables
+  - [x] 1.4 Add `.env.local` to `.gitignore` if not already present
+  - [x] 1.5 Update Supabase dashboard: enable email auth, configure redirect URLs, and set site URL
 
 - [ ] 2.0 Implement Database Schema and RLS Policies
   - [ ] 2.1 Update `db/schema.ts` to add `profiles` table with fields: id (uuid), full_name, avatar_url, deleted_at, created_at, updated_at
