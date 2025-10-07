@@ -193,7 +193,7 @@ export default function ProfilePage() {
           </div>
         )}
 
-        <div className="bg-white p-6 rounded-lg shadow space-y-6">
+        <div className=" p-6 rounded-lg shadow space-y-6">
           <h2 className="text-xl font-semibold">Profile Information</h2>
 
           <div>
@@ -240,7 +240,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow space-y-6">
+        <div className=" p-6 rounded-lg shadow space-y-6">
           <h2 className="text-xl font-semibold">Change Password</h2>
 
           <div>
@@ -274,7 +274,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow space-y-6">
+        <div className=" p-6 rounded-lg shadow space-y-6">
           <h2 className="text-xl font-semibold">Change Email</h2>
 
           <div>
@@ -307,7 +307,7 @@ export default function ProfilePage() {
           </button>
         </div>
 
-        <div className="bg-white p-6 rounded-lg shadow space-y-6">
+        <div className=" p-6 rounded-lg shadow space-y-6">
           <h2 className="text-xl font-semibold text-red-600">Danger Zone</h2>
 
           {!showDeleteConfirm ? (

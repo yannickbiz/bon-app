@@ -122,7 +122,7 @@ export default function LoginPage() {
               <div className="w-full border-t" />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white">Or continue with password</span>
+              <span className="px-2">Or continue with password</span>
             </div>
           </div>
 
