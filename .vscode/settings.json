@@ -1,0 +1,19 @@
+{
+  // Editor
+  "editor.defaultFormatter": "biomejs.biome",
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.biome": "explicit",
+    "source.fixAll.eslint": "explicit"
+  },
+
+  // Tailwind CSS
+  "files.associations": {
+    "*.css": "tailwindcss"
+  },
+  "tailwindCSS.experimental.classRegex": [
+    "tw`(.*?)`",
+    "tw\\('(.*?)'\\)",
+    "tw\\(\\s*('(.*?)'|\"(.*?)\")\\s*\\)"
+  ]
+}
