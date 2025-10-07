@@ -54,7 +54,7 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 2.4 Create database trigger to auto-create profile on user signup
   - [x] 2.5 Run migrations using `npm run db:migrate`
 
-- [ ] 3.0 Create Authentication Infrastructure and Utilities
+- [x] 3.0 Create Authentication Infrastructure and Utilities
   - [x] 3.1 Create `lib/supabase/client.ts` with browser-side Supabase client
   - [x] 3.2 Create `lib/supabase/server.ts` with server-side Supabase client using cookies
   - [x] 3.3 Create `lib/supabase/middleware.ts` with helper functions for middleware auth checks
@@ -63,17 +63,17 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 3.6 Run tests with `npm run test lib/auth/validation.test.ts`
 
 - [ ] 4.0 Build Authentication Pages and Flows
-  - [ ] 4.1 Create `app/(auth)` route group directory
-  - [ ] 4.2 Create `app/(auth)/login/page.tsx` with magic link (primary) and email/password (fallback) options
-  - [ ] 4.3 Create `app/(auth)/signup/page.tsx` with email/password registration form
-  - [ ] 4.4 Create `app/(auth)/verify/page.tsx` to display email verification pending message and resend option
-  - [ ] 4.5 Create `app/(auth)/reset-password/page.tsx` with forgot password and reset password forms
-  - [ ] 4.6 Create `app/(auth)/auth/callback/route.ts` to handle OAuth callbacks, magic links, and email verification
-  - [ ] 4.7 Write tests for login page in `app/(auth)/login/__tests__/page.test.tsx`
-  - [ ] 4.8 Write tests for signup page in `app/(auth)/signup/__tests__/page.test.tsx`
-  - [ ] 4.9 Write tests for verify page in `app/(auth)/verify/__tests__/page.test.tsx`
-  - [ ] 4.10 Write tests for reset password page in `app/(auth)/reset-password/__tests__/page.test.tsx`
-  - [ ] 4.11 Write tests for callback route in `app/(auth)/auth/callback/__tests__/route.test.ts`
+  - [x] 4.1 Create `app/(auth)` route group directory
+  - [x] 4.2 Create `app/(auth)/login/page.tsx` with magic link (primary) and email/password (fallback) options
+  - [x] 4.3 Create `app/(auth)/signup/page.tsx` with email/password registration form
+  - [x] 4.4 Create `app/(auth)/verify/page.tsx` to display email verification pending message and resend option
+  - [x] 4.5 Create `app/(auth)/reset-password/page.tsx` with forgot password and reset password forms
+  - [x] 4.6 Create `app/(auth)/auth/callback/route.ts` to handle OAuth callbacks, magic links, and email verification
+  - [x] 4.7 Write tests for login page in `app/(auth)/login/__tests__/page.test.tsx`
+  - [x] 4.8 Write tests for signup page in `app/(auth)/signup/__tests__/page.test.tsx`
+  - [x] 4.9 Write tests for verify page in `app/(auth)/verify/__tests__/page.test.tsx`
+  - [x] 4.10 Write tests for reset password page in `app/(auth)/reset-password/__tests__/page.test.tsx`
+  - [x] 4.11 Write tests for callback route in `app/(auth)/auth/callback/__tests__/route.test.ts`
 
 - [ ] 5.0 Implement Route Protection and Middleware
   - [ ] 5.1 Create `middleware.ts` at project root to check authentication status
