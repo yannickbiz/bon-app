@@ -62,7 +62,7 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 3.5 Write tests in `lib/auth/validation.test.ts` for validation utilities
   - [x] 3.6 Run tests with `npm run test lib/auth/validation.test.ts`
 
-- [ ] 4.0 Build Authentication Pages and Flows
+- [x] 4.0 Build Authentication Pages and Flows
   - [x] 4.1 Create `app/(auth)` route group directory
   - [x] 4.2 Create `app/(auth)/login/page.tsx` with magic link (primary) and email/password (fallback) options
   - [x] 4.3 Create `app/(auth)/signup/page.tsx` with email/password registration form
@@ -76,12 +76,12 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 4.11 Write tests for callback route in `app/(auth)/auth/callback/__tests__/route.test.ts`
 
 - [ ] 5.0 Implement Route Protection and Middleware
-  - [ ] 5.1 Create `middleware.ts` at project root to check authentication status
-  - [ ] 5.2 Implement redirect logic: unauthenticated users to /login, unverified users to /verify
-  - [ ] 5.3 Define public routes (login, signup, verify, reset-password, auth callback)
-  - [ ] 5.4 Preserve intended destination URL for post-login redirect
-  - [ ] 5.5 Handle session refresh and token management in middleware
-  - [ ] 5.6 Test middleware by accessing protected and public routes
+  - [x] 5.1 Create `middleware.ts` at project root to check authentication status
+  - [x] 5.2 Implement redirect logic: unauthenticated users to /login, unverified users to /verify
+  - [x] 5.3 Define public routes (login, signup, verify, reset-password, auth callback)
+  - [x] 5.4 Preserve intended destination URL for post-login redirect
+  - [x] 5.5 Handle session refresh and token management in middleware
+  - [x] 5.6 Test middleware by accessing protected and public routes
 
 - [ ] 6.0 Build User Profile Management
   - [ ] 6.1 Create `app/(protected)` route group directory
