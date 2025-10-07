@@ -40,7 +40,7 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 0.1 Create a new branch named `feature/supabase-auth` from main
   - [x] 0.2 Push the branch to remote repository
 
-- [ ] 1.0 Setup Supabase Integration and Configuration
+- [x] 1.0 Setup Supabase Integration and Configuration
   - [x] 1.1 Install `@supabase/ssr` package
   - [x] 1.2 Create `.env.local` file with Supabase credentials (NEXT_PUBLIC_SUPABASE_URL, NEXT_PUBLIC_SUPABASE_ANON_KEY, SUPABASE_SERVICE_ROLE_KEY)
   - [x] 1.3 Create `.env.example` file with placeholder environment variables
@@ -48,11 +48,11 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 1.5 Update Supabase dashboard: enable email auth, configure redirect URLs, and set site URL
 
 - [ ] 2.0 Implement Database Schema and RLS Policies
-  - [ ] 2.1 Update `db/schema.ts` to add `profiles` table with fields: id (uuid), full_name, avatar_url, deleted_at, created_at, updated_at
-  - [ ] 2.2 Generate migration files using `npm run db:generate`
-  - [ ] 2.3 Create RLS policies in Supabase dashboard for profiles table (users can read/update their own profile)
-  - [ ] 2.4 Create database trigger to auto-create profile on user signup
-  - [ ] 2.5 Run migrations using `npm run db:migrate`
+  - [x] 2.1 Update `db/schema.ts` to add `profiles` table with fields: id (uuid), full_name, avatar_url, deleted_at, created_at, updated_at
+  - [x] 2.2 Generate migration files using `npm run db:generate`
+  - [x] 2.3 Create RLS policies in Supabase dashboard for profiles table (users can read/update their own profile)
+  - [x] 2.4 Create database trigger to auto-create profile on user signup
+  - [x] 2.5 Run migrations using `npm run db:migrate`
 
 - [ ] 3.0 Create Authentication Infrastructure and Utilities
   - [ ] 3.1 Create `lib/supabase/client.ts` with browser-side Supabase client
