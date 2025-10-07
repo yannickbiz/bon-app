@@ -60,6 +60,8 @@ export default function ProfilePage() {
   }, [router, supabase]);
 
   async function handleUpdateProfile() {
+    if (!user) return;
+
     setIsUpdating(true);
     setError("");
     setMessage("");
@@ -130,6 +132,8 @@ export default function ProfilePage() {
   }
 
   async function handleDeleteAccount() {
+    if (!user) return;
+
     setIsUpdating(true);
     setError("");
     setMessage("");

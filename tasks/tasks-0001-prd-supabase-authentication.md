@@ -83,7 +83,7 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 5.5 Handle session refresh and token management in middleware
   - [x] 5.6 Test middleware by accessing protected and public routes
 
-- [ ] 6.0 Build User Profile Management
+- [x] 6.0 Build User Profile Management
   - [x] 6.1 Create `app/(protected)` route group directory
   - [x] 6.2 Create `app/(protected)/layout.tsx` wrapper for authenticated routes
   - [x] 6.3 Create `app/(protected)/profile/page.tsx` with profile view and edit forms
@@ -96,16 +96,16 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 6.10 Write tests for profile page in `app/(protected)/profile/__tests__/page.test.tsx`
   - [x] 6.11 Update `app/page.tsx` to redirect authenticated users or show appropriate content
 
-- [ ] 7.0 Testing and Validation
+- [x] 7.0 Testing and Validation
   - [x] 7.1 Run full test suite with `npm run test`
   - [x] 7.2 Fix any failing tests
   - [x] 7.3 Run `npm run lint` and fix any linting errors
-  - [ ] 7.4 Run `npm run build` to ensure production build succeeds
-  - [ ] 7.5 Manually test complete signup flow (email/password)
-  - [ ] 7.6 Manually test magic link login flow
-  - [ ] 7.7 Manually test email verification requirement
-  - [ ] 7.8 Manually test password reset flow
-  - [ ] 7.9 Manually test profile management (update name, avatar, password, email)
-  - [ ] 7.10 Manually test account deletion and verify soft delete
-  - [ ] 7.11 Manually test route protection and redirects
-  - [ ] 7.12 Verify session persistence across browser refresh
+  - [x] 7.4 Run `npm run build` to ensure production build succeeds
+  - [x] 7.5 Manually test complete signup flow (email/password)
+  - [x] 7.6 Manually test magic link login flow
+  - [x] 7.7 Manually test email verification requirement
+  - [x] 7.8 Manually test password reset flow
+  - [x] 7.9 Manually test profile management (update name, avatar, password, email)
+  - [x] 7.10 Manually test account deletion and verify soft delete
+  - [x] 7.11 Manually test route protection and redirects
+  - [x] 7.12 Verify session persistence across browser refresh
