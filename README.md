@@ -53,3 +53,23 @@ public/           Static assets
 - Biome for linting and formatting
 - Path alias `@/` for root directory imports
 - TypeScript strict mode enabled
+
+## AI-Assisted Development
+
+This project uses Ryan Carson's 3-File System for structured AI development.
+
+**TL;DR:** A structured workflow to reduce bugs when using AI to code:
+
+1. **create-prd.md** - Creates detailed Product Requirements Document (PRD) with technical specs
+2. **generate-tasks.md** - Breaks PRD into small, atomic parent/child tasks  
+3. **process-task-list.md** - Executes ONE task at a time using test-driven development (TDD)
+
+**Workflow:** Create PRD → Generate Tasks → Process Each Task (write tests first, then code) → Repeat
+
+**Key Benefits:**
+- Reduces AI hallucinations by limiting scope to one task at a time
+- Enforces TDD (tests before implementation)
+- Creates automatic documentation
+- Prevents scope creep through linear, focused progression
+
+See [agent-prompts/README.md](./agent-prompts/README.md) for the complete workflow and methodology.

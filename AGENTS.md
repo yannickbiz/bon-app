@@ -9,6 +9,12 @@
 - **Test UI**: `npm run test:ui` (Vitest UI mode)
 - **Test Coverage**: `npm run test:coverage` (with coverage report)
 
+## Database Commands (Drizzle ORM + Supabase)
+- **Generate migrations**: `npm run db:generate` (create migration files from schema)
+- **Run migrations**: `npm run db:migrate` (apply migrations to database)
+- **Push schema**: `npm run db:push` (push schema directly without migrations)
+- **Drizzle Studio**: `npm run db:studio` (browse and edit database)
+
 ## Code Style
 - **Linter/Formatter**: Biome (not ESLint/Prettier)
 - **Indentation**: 2 spaces
