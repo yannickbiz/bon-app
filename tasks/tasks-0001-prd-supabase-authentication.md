@@ -47,7 +47,7 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 1.4 Add `.env.local` to `.gitignore` if not already present
   - [x] 1.5 Update Supabase dashboard: enable email auth, configure redirect URLs, and set site URL
 
-- [ ] 2.0 Implement Database Schema and RLS Policies
+- [x] 2.0 Implement Database Schema and RLS Policies
   - [x] 2.1 Update `db/schema.ts` to add `profiles` table with fields: id (uuid), full_name, avatar_url, deleted_at, created_at, updated_at
   - [x] 2.2 Generate migration files using `npm run db:generate`
   - [x] 2.3 Create RLS policies in Supabase dashboard for profiles table (users can read/update their own profile)
@@ -55,12 +55,12 @@ Based on PRD: `0001-prd-supabase-authentication.md`
   - [x] 2.5 Run migrations using `npm run db:migrate`
 
 - [ ] 3.0 Create Authentication Infrastructure and Utilities
-  - [ ] 3.1 Create `lib/supabase/client.ts` with browser-side Supabase client
-  - [ ] 3.2 Create `lib/supabase/server.ts` with server-side Supabase client using cookies
-  - [ ] 3.3 Create `lib/supabase/middleware.ts` with helper functions for middleware auth checks
-  - [ ] 3.4 Create `lib/auth/validation.ts` with password validation (8+ chars, uppercase, lowercase, digit, symbol) and email validation functions
-  - [ ] 3.5 Write tests in `lib/auth/validation.test.ts` for validation utilities
-  - [ ] 3.6 Run tests with `npm run test lib/auth/validation.test.ts`
+  - [x] 3.1 Create `lib/supabase/client.ts` with browser-side Supabase client
+  - [x] 3.2 Create `lib/supabase/server.ts` with server-side Supabase client using cookies
+  - [x] 3.3 Create `lib/supabase/middleware.ts` with helper functions for middleware auth checks
+  - [x] 3.4 Create `lib/auth/validation.ts` with password validation (8+ chars, uppercase, lowercase, digit, symbol) and email validation functions
+  - [x] 3.5 Write tests in `lib/auth/validation.test.ts` for validation utilities
+  - [x] 3.6 Run tests with `npm run test lib/auth/validation.test.ts`
 
 - [ ] 4.0 Build Authentication Pages and Flows
   - [ ] 4.1 Create `app/(auth)` route group directory
