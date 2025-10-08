@@ -7,7 +7,6 @@ import { createClient } from "@/lib/supabase/client";
 
 export default function ProfilePage() {
   const router = useRouter();
-  const supabase = createClient();
 
   const [user, setUser] = useState<{ id: string; email?: string } | null>(null);
   const [_profile, setProfile] = useState<{
@@ -29,6 +28,7 @@ export default function ProfilePage() {
 
   useEffect(() => {
     async function loadUserData() {
+      const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
@@ -57,7 +57,7 @@ export default function ProfilePage() {
     }
 
     loadUserData();
-  }, [router, supabase]);
+  }, [router]);
 
   async function handleUpdateProfile() {
     if (!user) return;
@@ -66,6 +66,7 @@ export default function ProfilePage() {
     setError("");
     setMessage("");
 
+    const supabase = createClient();
     const { error: updateError } = await supabase
       .from("profiles")
       .update({
@@ -96,6 +97,7 @@ export default function ProfilePage() {
       return;
     }
 
+    const supabase = createClient();
     const { error: updateError } = await supabase.auth.updateUser({
       password: newPassword,
     });
@@ -116,6 +118,7 @@ export default function ProfilePage() {
     setError("");
     setMessage("");
 
+    const supabase = createClient();
     const { error: updateError } = await supabase.auth.updateUser({
       email: newEmail,
     });
@@ -138,6 +141,7 @@ export default function ProfilePage() {
     setError("");
     setMessage("");
 
+    const supabase = createClient();
     const { error: updateError } = await supabase
       .from("profiles")
       .update({
@@ -155,6 +159,7 @@ export default function ProfilePage() {
   }
 
   async function handleLogout() {
+    const supabase = createClient();
     await supabase.auth.signOut();
     router.push("/login");
   }

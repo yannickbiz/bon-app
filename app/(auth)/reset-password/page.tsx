@@ -14,7 +14,6 @@ function ResetPasswordContent() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [isResetMode, setIsResetMode] = useState(false);
-  const supabase = createClient();
 
   useEffect(() => {
     const type = searchParams.get("type");
@@ -35,6 +34,7 @@ function ResetPasswordContent() {
       return;
     }
 
+    const supabase = createClient();
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
       redirectTo: `${window.location.origin}/reset-password?type=recovery`,
     });
@@ -61,6 +61,7 @@ function ResetPasswordContent() {
       return;
     }
 
+    const supabase = createClient();
     const { error } = await supabase.auth.updateUser({
       password: newPassword,
     });

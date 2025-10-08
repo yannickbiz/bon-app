@@ -7,13 +7,13 @@ export default function VerifyPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
-  const supabase = createClient();
 
   async function handleResendVerification() {
     setIsLoading(true);
     setError("");
     setMessage("");
 
+    const supabase = createClient();
     const {
       data: { user },
     } = await supabase.auth.getUser();

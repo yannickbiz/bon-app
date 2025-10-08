@@ -12,7 +12,6 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
-  const supabase = createClient();
 
   async function handleMagicLink(e: React.FormEvent) {
     e.preventDefault();
@@ -26,6 +25,7 @@ export default function LoginPage() {
       return;
     }
 
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
       email,
       options: {
@@ -60,6 +60,7 @@ export default function LoginPage() {
       return;
     }
 
+    const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({
       email,
       password,
