@@ -1,6 +1,15 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { createClient } from "@/lib/supabase/client";
 
 export default function VerifyPage() {
@@ -43,44 +52,46 @@ export default function VerifyPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-8">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Verify Your Email</h1>
-          <p className="text-gray-600 mb-6">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center">
+            Verify Your Email
+          </CardTitle>
+          <CardDescription className="text-center">
             We've sent you a verification email. Please check your inbox and
             click the link to verify your account.
-          </p>
-        </div>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {error && (
+            <div className="bg-destructive/15 text-destructive text-sm p-3 rounded-md">
+              {error}
+            </div>
+          )}
 
-        {error && (
-          <div className="bg-red-50 text-red-600 p-3 rounded text-sm">
-            {error}
+          {message && (
+            <div className="bg-green-50 dark:bg-green-950 text-green-600 dark:text-green-400 text-sm p-3 rounded-md">
+              {message}
+            </div>
+          )}
+
+          <div className="space-y-4">
+            <Button
+              onClick={handleResendVerification}
+              disabled={isLoading}
+              className="w-full"
+            >
+              {isLoading ? "Sending..." : "Resend Verification Email"}
+            </Button>
+
+            <div className="text-center text-sm">
+              <Link href="/login" className="text-primary hover:underline">
+                Back to login
+              </Link>
+            </div>
           </div>
-        )}
-
-        {message && (
-          <div className="bg-green-50 text-green-600 p-3 rounded text-sm">
-            {message}
-          </div>
-        )}
-
-        <div className="space-y-4">
-          <button
-            type="button"
-            onClick={handleResendVerification}
-            disabled={isLoading}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50"
-          >
-            {isLoading ? "Sending..." : "Resend Verification Email"}
-          </button>
-
-          <div className="text-center">
-            <a href="/login" className="text-sm text-blue-600 hover:underline">
-              Back to login
-            </a>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

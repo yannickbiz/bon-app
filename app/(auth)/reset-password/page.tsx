@@ -1,7 +1,18 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { validateEmail, validatePassword } from "@/lib/auth/validation";
 import { createClient } from "@/lib/supabase/client";
 
@@ -80,112 +91,106 @@ function ResetPasswordContent() {
   if (isResetMode) {
     return (
       <div className="min-h-screen flex items-center justify-center p-4">
-        <div className="w-full max-w-md space-y-8">
-          <div>
-            <h1 className="text-2xl font-bold text-center">Reset Password</h1>
-          </div>
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="text-2xl text-center">
+              Reset Password
+            </CardTitle>
+            <CardDescription className="text-center">
+              Enter your new password below
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            {error && (
+              <div className="bg-destructive/15 text-destructive text-sm p-3 rounded-md">
+                {error}
+              </div>
+            )}
 
-          {error && (
-            <div className="bg-red-50 text-red-600 p-3 rounded text-sm">
-              {error}
-            </div>
-          )}
+            {message && (
+              <div className="bg-green-50 dark:bg-green-950 text-green-600 dark:text-green-400 text-sm p-3 rounded-md">
+                {message}
+              </div>
+            )}
 
-          {message && (
-            <div className="bg-green-50 text-green-600 p-3 rounded text-sm">
-              {message}
-            </div>
-          )}
+            <form onSubmit={handleResetPassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="newPassword">New Password</Label>
+                <Input
+                  id="newPassword"
+                  type="password"
+                  placeholder="••••••••"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  required
+                  disabled={isLoading}
+                />
+                <p className="text-xs text-muted-foreground">
+                  Must be at least 8 characters with uppercase, lowercase,
+                  digit, and symbol
+                </p>
+              </div>
 
-          <form onSubmit={handleResetPassword} className="space-y-4">
-            <div>
-              <label
-                htmlFor="newPassword"
-                className="block text-sm font-medium mb-2"
-              >
-                New Password
-              </label>
-              <input
-                id="newPassword"
-                type="password"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                required
-                className="w-full px-3 py-2 border rounded"
-                disabled={isLoading}
-              />
-              <p className="text-xs text-gray-500 mt-1">
-                Must be at least 8 characters with uppercase, lowercase, digit,
-                and symbol
-              </p>
-            </div>
-
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50"
-            >
-              {isLoading ? "Updating..." : "Update Password"}
-            </button>
-          </form>
-        </div>
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? "Updating..." : "Update Password"}
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
       </div>
     );
   }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
-      <div className="w-full max-w-md space-y-8">
-        <div>
-          <h1 className="text-2xl font-bold text-center">Forgot Password</h1>
-          <p className="text-center text-gray-600 mt-2">
+      <Card className="w-full max-w-md">
+        <CardHeader>
+          <CardTitle className="text-2xl text-center">
+            Forgot Password
+          </CardTitle>
+          <CardDescription className="text-center">
             Enter your email to receive a password reset link
-          </p>
-        </div>
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {error && (
+            <div className="bg-destructive/15 text-destructive text-sm p-3 rounded-md">
+              {error}
+            </div>
+          )}
 
-        {error && (
-          <div className="bg-red-50 text-red-600 p-3 rounded text-sm">
-            {error}
+          {message && (
+            <div className="bg-green-50 dark:bg-green-950 text-green-600 dark:text-green-400 text-sm p-3 rounded-md">
+              {message}
+            </div>
+          )}
+
+          <form onSubmit={handleForgotPassword} className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                disabled={isLoading}
+              />
+            </div>
+
+            <Button type="submit" disabled={isLoading} className="w-full">
+              {isLoading ? "Sending..." : "Send Reset Link"}
+            </Button>
+          </form>
+
+          <div className="text-center text-sm">
+            <Link href="/login" className="text-primary hover:underline">
+              Back to login
+            </Link>
           </div>
-        )}
-
-        {message && (
-          <div className="bg-green-50 text-green-600 p-3 rounded text-sm">
-            {message}
-          </div>
-        )}
-
-        <form onSubmit={handleForgotPassword} className="space-y-4">
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
-            </label>
-            <input
-              id="email"
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-3 py-2 border rounded"
-              disabled={isLoading}
-            />
-          </div>
-
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 disabled:opacity-50"
-          >
-            {isLoading ? "Sending..." : "Send Reset Link"}
-          </button>
-        </form>
-
-        <div className="text-center">
-          <a href="/login" className="text-sm text-blue-600 hover:underline">
-            Back to login
-          </a>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
     </div>
   );
 }

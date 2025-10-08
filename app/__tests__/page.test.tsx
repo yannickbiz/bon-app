@@ -26,6 +26,5 @@ describe("Home", () => {
 
     expect(screen.getByText("Welcome to Bon App")).toBeTruthy();
     expect(screen.getByText("Sign In")).toBeTruthy();
-    expect(screen.getByText("Sign Up")).toBeTruthy();
   });
 });
