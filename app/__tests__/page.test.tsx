@@ -1,30 +1,92 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
-import * as supabaseServer from "@/lib/supabase/server";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import Home from "../page";
 
-vi.mock("@/lib/supabase/server", () => ({
-  createClient: vi.fn(),
-}));
-
-vi.mock("next/navigation", () => ({
-  redirect: vi.fn(),
-}));
+global.fetch = vi.fn();
 
 describe("Home", () => {
-  it("renders welcome message for unauthenticated users", async () => {
-    (supabaseServer.createClient as ReturnType<typeof vi.fn>).mockResolvedValue(
-      {
-        auth: {
-          getUser: vi.fn().mockResolvedValue({ data: { user: null } }),
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it("renders scraper interface", () => {
+    render(<Home />);
+
+    expect(screen.getByText("Social Media Scraper")).toBeTruthy();
+    expect(screen.getByLabelText("URL")).toBeTruthy();
+    expect(screen.getByText("Scrape URL")).toBeTruthy();
+  });
+
+  it("submits scraper request", async () => {
+    const mockResponse = {
+      success: true,
+      data: {
+        platform: "instagram",
+        postId: "ABC123",
+        url: "https://instagram.com/p/ABC123",
+        title: "Test post",
+        author: {
+          username: "testuser",
+          displayName: "Test User",
+          profileUrl: "https://instagram.com/testuser",
+          avatarUrl: null,
         },
+        videoUrl: null,
+        coverImageUrl: "https://example.com/cover.jpg",
+        engagement: { likes: 100, comments: 10, shares: null, views: null },
+        hashtags: ["test"],
+        mentions: [],
+        timestamp: null,
+        musicInfo: null,
+        location: null,
+        isVideo: false,
       },
-    );
+      error: null,
+    };
 
-    const Component = await Home();
-    render(Component);
+    vi.mocked(fetch).mockResolvedValue({
+      json: async () => mockResponse,
+    } as Response);
 
-    expect(screen.getByText("Welcome to Bon App")).toBeTruthy();
-    expect(screen.getByText("Sign In")).toBeTruthy();
+    render(<Home />);
+
+    const input = screen.getByLabelText("URL") as HTMLInputElement;
+    const button = screen.getByText("Scrape URL");
+
+    fireEvent.change(input, {
+      target: { value: "https://instagram.com/p/ABC123" },
+    });
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(screen.getByText("Scraped Data")).toBeTruthy();
+      expect(screen.getByText("Platform:")).toBeTruthy();
+      expect(screen.getByText("instagram")).toBeTruthy();
+    });
+  });
+
+  it("displays error message on failure", async () => {
+    const mockResponse = {
+      success: false,
+      data: null,
+      error: "Invalid URL format",
+    };
+
+    vi.mocked(fetch).mockResolvedValue({
+      json: async () => mockResponse,
+    } as Response);
+
+    render(<Home />);
+
+    const input = screen.getByLabelText("URL") as HTMLInputElement;
+    const button = screen.getByText("Scrape URL");
+
+    fireEvent.change(input, { target: { value: "https://invalid.com" } });
+    fireEvent.click(button);
+
+    await waitFor(() => {
+      expect(screen.getByText("Error")).toBeTruthy();
+      expect(screen.getByText("Invalid URL format")).toBeTruthy();
+    });
   });
 });
