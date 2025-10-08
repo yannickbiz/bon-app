@@ -42,40 +42,40 @@
   - [x] 2.8 Verify tables were created using `npm run db:studio` (skipped - no DATABASE_URL configured)
 
 - [ ] 3.0 Create core scraper infrastructure
-  - [ ] 3.1 Create `lib/scraper/types.ts` with TypeScript interfaces:
-    - [ ] 3.1.1 Define `ScrapedContent` interface matching the PRD specification
-    - [ ] 3.1.2 Define `ScraperResponse` interface with success, data, and error fields
-    - [ ] 3.1.3 Define `ScraperRequestBody` interface for API input validation
-    - [ ] 3.1.4 Define `PlatformType` and `ScrapeStatus` types
-    - [ ] 3.1.5 Export all types for use across the application
-  - [ ] 3.2 Create `lib/scraper/url-validator.ts` with URL validation logic:
-    - [ ] 3.2.1 Create `validateUrl` function that takes a URL string and returns platform type or null
-    - [ ] 3.2.2 Create `isInstagramUrl` helper to validate Instagram post/reel URLs (format: instagram.com/p/{id} or instagram.com/reel/{id})
-    - [ ] 3.2.3 Create `isTikTokUrl` helper to validate TikTok video URLs (format: tiktok.com/@{user}/video/{id})
-    - [ ] 3.2.4 Create `extractPostId` function to extract post ID from validated URLs
-    - [ ] 3.2.5 Handle URL variations (http/https, www/non-www, trailing slashes)
-  - [ ] 3.3 Create `lib/scraper/url-validator.test.ts` with comprehensive tests:
-    - [ ] 3.3.1 Test valid Instagram post URLs
-    - [ ] 3.3.2 Test valid Instagram reel URLs
-    - [ ] 3.3.3 Test valid TikTok video URLs
-    - [ ] 3.3.4 Test invalid URLs return null
-    - [ ] 3.3.5 Test URL variations (http/https, www, trailing slashes)
-    - [ ] 3.3.6 Test extractPostId for both platforms
-  - [ ] 3.4 Create `lib/scraper/database.ts` with database operations:
-    - [ ] 3.4.1 Create `getCachedContent` function to query scraped_content by URL
-    - [ ] 3.4.2 Create `upsertScrapedContent` function to insert or update scraped content
-    - [ ] 3.4.3 Create `logFailedScrape` function to insert into scraping_logs table
-    - [ ] 3.4.4 Create helper to transform database rows to ScrapedContent interface
-    - [ ] 3.4.5 Create helper to transform ScrapedContent to database insert format
-    - [ ] 3.4.6 Import and use Drizzle ORM client from `db/index.ts`
-  - [ ] 3.5 Create `lib/scraper/database.test.ts` with database operation tests:
-    - [ ] 3.5.1 Mock Drizzle ORM database client
-    - [ ] 3.5.2 Test getCachedContent returns cached data when URL exists
-    - [ ] 3.5.3 Test getCachedContent returns null when URL doesn't exist
-    - [ ] 3.5.4 Test upsertScrapedContent inserts new records
-    - [ ] 3.5.5 Test upsertScrapedContent updates existing records (force re-scrape)
-    - [ ] 3.5.6 Test logFailedScrape writes to scraping_logs table
-    - [ ] 3.5.7 Test data transformation helpers
+  - [x] 3.1 Create `lib/scraper/types.ts` with TypeScript interfaces:
+    - [x] 3.1.1 Define `ScrapedContent` interface matching the PRD specification
+    - [x] 3.1.2 Define `ScraperResponse` interface with success, data, and error fields
+    - [x] 3.1.3 Define `ScraperRequestBody` interface for API input validation
+    - [x] 3.1.4 Define `PlatformType` and `ScrapeStatus` types
+    - [x] 3.1.5 Export all types for use across the application
+  - [x] 3.2 Create `lib/scraper/url-validator.ts` with URL validation logic:
+    - [x] 3.2.1 Create `validateUrl` function that takes a URL string and returns platform type or null
+    - [x] 3.2.2 Create `isInstagramUrl` helper to validate Instagram post/reel URLs (format: instagram.com/p/{id} or instagram.com/reel/{id})
+    - [x] 3.2.3 Create `isTikTokUrl` helper to validate TikTok video URLs (format: tiktok.com/@{user}/video/{id})
+    - [x] 3.2.4 Create `extractPostId` function to extract post ID from validated URLs
+    - [x] 3.2.5 Handle URL variations (http/https, www/non-www, trailing slashes)
+  - [x] 3.3 Create `lib/scraper/url-validator.test.ts` with comprehensive tests:
+    - [x] 3.3.1 Test valid Instagram post URLs
+    - [x] 3.3.2 Test valid Instagram reel URLs
+    - [x] 3.3.3 Test valid TikTok video URLs
+    - [x] 3.3.4 Test invalid URLs return null
+    - [x] 3.3.5 Test URL variations (http/https, www, trailing slashes)
+    - [x] 3.3.6 Test extractPostId for both platforms
+  - [x] 3.4 Create `lib/scraper/database.ts` with database operations:
+    - [x] 3.4.1 Create `getCachedContent` function to query scraped_content by URL
+    - [x] 3.4.2 Create `upsertScrapedContent` function to insert or update scraped content
+    - [x] 3.4.3 Create `logFailedScrape` function to insert into scraping_logs table
+    - [x] 3.4.4 Create helper to transform database rows to ScrapedContent interface
+    - [x] 3.4.5 Create helper to transform ScrapedContent to database insert format
+    - [x] 3.4.6 Import and use Drizzle ORM client from `db/index.ts`
+  - [x] 3.5 Create `lib/scraper/database.test.ts` with database operation tests:
+    - [x] 3.5.1 Mock Drizzle ORM database client
+    - [x] 3.5.2 Test getCachedContent returns cached data when URL exists
+    - [x] 3.5.3 Test getCachedContent returns null when URL doesn't exist
+    - [x] 3.5.4 Test upsertScrapedContent inserts new records
+    - [x] 3.5.5 Test upsertScrapedContent updates existing records (force re-scrape)
+    - [x] 3.5.6 Test logFailedScrape writes to scraping_logs table
+    - [x] 3.5.7 Test data transformation helpers
 
 - [ ] 4.0 Implement platform-specific scrapers
   - [ ] 4.1 Install required dependencies:
