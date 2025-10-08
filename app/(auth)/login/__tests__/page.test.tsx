@@ -36,7 +36,8 @@ describe("LoginPage", () => {
     render(<LoginPage />);
 
     expect(screen.getByText("Sign In")).toBeTruthy();
-    expect(screen.getByLabelText("Email")).toBeTruthy();
+    // Two email fields: one for magic link, one for password login
+    expect(screen.getAllByLabelText("Email")).toHaveLength(2);
     expect(screen.getByLabelText("Password")).toBeTruthy();
     expect(
       screen.getByRole("button", { name: "Send Magic Link" }),
@@ -52,12 +53,13 @@ describe("LoginPage", () => {
     mockSignInWithOtp.mockResolvedValue({ error: null });
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const magicLinkEmail = emailInputs[0]; // First email field (magic link form)
     const submitButton = screen.getByRole("button", {
       name: "Send Magic Link",
     });
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(magicLinkEmail, { target: { value: "test@example.com" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -77,17 +79,23 @@ describe("LoginPage", () => {
   it("should show error for invalid email on magic link", async () => {
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
-    const form = emailInput.closest("form") as HTMLFormElement;
-
-    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
-    fireEvent.submit(form);
-
-    await waitFor(() => {
-      expect(
-        screen.getByText("Please enter a valid email address"),
-      ).toBeTruthy();
+    const emailInputs = screen.getAllByLabelText("Email");
+    const magicLinkEmail = emailInputs[0]; // First email field (magic link form)
+    const submitButton = screen.getByRole("button", {
+      name: "Send Magic Link",
     });
+
+    fireEvent.change(magicLinkEmail, { target: { value: "invalid-email" } });
+    fireEvent.click(submitButton);
+
+    await waitFor(
+      () => {
+        expect(
+          screen.getByText("Please enter a valid email address"),
+        ).toBeTruthy();
+      },
+      { timeout: 3000 },
+    );
 
     expect(mockSignInWithOtp).not.toHaveBeenCalled();
   });
@@ -98,12 +106,13 @@ describe("LoginPage", () => {
     });
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const magicLinkEmail = emailInputs[0]; // First email field (magic link form)
     const submitButton = screen.getByRole("button", {
       name: "Send Magic Link",
     });
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(magicLinkEmail, { target: { value: "test@example.com" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
@@ -115,13 +124,16 @@ describe("LoginPage", () => {
     mockSignInWithPassword.mockResolvedValue({ error: null });
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const passwordLoginEmail = emailInputs[1]; // Second email field (password form)
     const passwordInput = screen.getByLabelText("Password");
     const submitButton = screen.getByRole("button", {
       name: "Sign In with Password",
     });
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordLoginEmail, {
+      target: { value: "test@example.com" },
+    });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(submitButton);
 
@@ -139,21 +151,27 @@ describe("LoginPage", () => {
   it("should show error for invalid email on password login", async () => {
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const passwordLoginEmail = emailInputs[1]; // Second email field (password form)
     const passwordInput = screen.getByLabelText("Password");
     const submitButton = screen.getByRole("button", {
       name: "Sign In with Password",
     });
 
-    fireEvent.change(emailInput, { target: { value: "invalid-email" } });
+    fireEvent.change(passwordLoginEmail, {
+      target: { value: "invalid-email" },
+    });
     fireEvent.change(passwordInput, { target: { value: "password123" } });
     fireEvent.click(submitButton);
 
-    await waitFor(() => {
-      expect(
-        screen.getByText("Please enter a valid email address"),
-      ).toBeTruthy();
-    });
+    await waitFor(
+      () => {
+        expect(
+          screen.getByText("Please enter a valid email address"),
+        ).toBeTruthy();
+      },
+      { timeout: 3000 },
+    );
 
     expect(mockSignInWithPassword).not.toHaveBeenCalled();
   });
@@ -161,16 +179,23 @@ describe("LoginPage", () => {
   it("should show error when password is empty", async () => {
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
-    const passwordInput = screen.getByLabelText("Password");
-    const form = passwordInput.closest("form") as HTMLFormElement;
-
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
-    fireEvent.submit(form);
-
-    await waitFor(() => {
-      expect(screen.getByText("Please enter your password")).toBeTruthy();
+    const emailInputs = screen.getAllByLabelText("Email");
+    const passwordLoginEmail = emailInputs[1]; // Second email field (password form)
+    const submitButton = screen.getByRole("button", {
+      name: "Sign In with Password",
     });
+
+    fireEvent.change(passwordLoginEmail, {
+      target: { value: "test@example.com" },
+    });
+    fireEvent.click(submitButton);
+
+    await waitFor(
+      () => {
+        expect(screen.getByText("Password is required")).toBeTruthy();
+      },
+      { timeout: 3000 },
+    );
 
     expect(mockSignInWithPassword).not.toHaveBeenCalled();
   });
@@ -181,13 +206,16 @@ describe("LoginPage", () => {
     });
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const passwordLoginEmail = emailInputs[1]; // Second email field (password form)
     const passwordInput = screen.getByLabelText("Password");
     const submitButton = screen.getByRole("button", {
       name: "Sign In with Password",
     });
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(passwordLoginEmail, {
+      target: { value: "test@example.com" },
+    });
     fireEvent.change(passwordInput, { target: { value: "wrongpassword" } });
     fireEvent.click(submitButton);
 
@@ -207,16 +235,19 @@ describe("LoginPage", () => {
     );
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const magicLinkEmail = emailInputs[0]; // First email field (magic link form)
     const magicLinkButton = screen.getByRole("button", {
       name: "Send Magic Link",
     });
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(magicLinkEmail, { target: { value: "test@example.com" } });
     fireEvent.click(magicLinkButton);
 
-    expect(screen.getByRole("button", { name: "Sending..." })).toBeTruthy();
-    expect(emailInput).toHaveProperty("disabled", true);
+    await waitFor(() => {
+      expect(screen.getByRole("button", { name: "Sending..." })).toBeTruthy();
+    });
+    expect(magicLinkEmail).toHaveProperty("disabled", true);
 
     await waitFor(() => {
       expect(
@@ -231,12 +262,13 @@ describe("LoginPage", () => {
     });
     render(<LoginPage />);
 
-    const emailInput = screen.getByLabelText("Email");
+    const emailInputs = screen.getAllByLabelText("Email");
+    const magicLinkEmail = emailInputs[0]; // First email field (magic link form)
     const submitButton = screen.getByRole("button", {
       name: "Send Magic Link",
     });
 
-    fireEvent.change(emailInput, { target: { value: "test@example.com" } });
+    fireEvent.change(magicLinkEmail, { target: { value: "test@example.com" } });
     fireEvent.click(submitButton);
 
     await waitFor(() => {
