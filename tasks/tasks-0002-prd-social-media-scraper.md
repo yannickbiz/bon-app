@@ -1,0 +1,207 @@
+# Task List: Social Media Scraper API (Instagram & TikTok)
+
+## Relevant Files
+
+- `db/schema.ts` - Add database schema for scraped content and scraping logs tables
+- `app/api/scraper/route.ts` - Main API endpoint handler for scraping requests
+- `app/api/scraper/__tests__/route.test.ts` - Unit tests for API endpoint
+- `lib/scraper/types.ts` - TypeScript interfaces and types for scraped content
+- `lib/scraper/url-validator.ts` - URL validation utilities for Instagram and TikTok
+- `lib/scraper/url-validator.test.ts` - Unit tests for URL validation
+- `lib/scraper/instagram-scraper.ts` - Instagram-specific scraping logic
+- `lib/scraper/instagram-scraper.test.ts` - Unit tests for Instagram scraper
+- `lib/scraper/tiktok-scraper.ts` - TikTok-specific scraping logic
+- `lib/scraper/tiktok-scraper.test.ts` - Unit tests for TikTok scraper
+- `lib/scraper/database.ts` - Database operations (cache lookup, upsert, logging)
+- `lib/scraper/database.test.ts` - Unit tests for database operations
+- `lib/scraper/rate-limiter.ts` - Rate limiting middleware and utilities
+- `lib/scraper/rate-limiter.test.ts` - Unit tests for rate limiter
+- `middleware.ts` - Update to handle rate limiting for scraper endpoint
+
+### Notes
+
+- Unit tests should be placed in `__tests__/` directories next to the code files they are testing
+- Use `npm run test` to run all tests, or `npm run test [path]` to run specific test files
+- Use `npm run db:generate` to create database migrations after schema changes
+- Use `npm run db:migrate` to apply migrations to the database
+
+## Tasks
+
+- [x] 1.0 Create feature branch
+  - [x] 1.1 Create a new branch from `main` named `feature/0002-social-media-scraper`
+  - [x] 1.2 Verify you're on the new branch with `git branch --show-current`
+
+- [x] 2.0 Set up database schema and migrations
+  - [x] 2.1 Open `db/schema.ts` and add the `platformEnum` for 'instagram' and 'tiktok'
+  - [x] 2.2 Add the `scrapeStatusEnum` for 'success', 'failed', and 'rate_limited'
+  - [x] 2.3 Create the `scrapedContent` table with all required fields (platform, postId, url, title, author fields, media URLs, engagement metrics, hashtags, mentions, postTimestamp, musicInfo, location, isVideo, timestamps)
+  - [x] 2.4 Create the `scrapingLogs` table with all required fields (url, platform, status, scrapeDurationMs, httpStatusCode, errorMessage, errorStack, requestMetadata, unavailableFields, scrapedContentId, createdAt)
+  - [x] 2.5 Run `npm run db:generate` to create migration files
+  - [x] 2.6 Review the generated migration SQL in `db/migrations/`
+  - [x] 2.7 Run `npm run db:push` to apply the schema to the database (skipped - no DATABASE_URL configured)
+  - [x] 2.8 Verify tables were created using `npm run db:studio` (skipped - no DATABASE_URL configured)
+
+- [ ] 3.0 Create core scraper infrastructure
+  - [ ] 3.1 Create `lib/scraper/types.ts` with TypeScript interfaces:
+    - [ ] 3.1.1 Define `ScrapedContent` interface matching the PRD specification
+    - [ ] 3.1.2 Define `ScraperResponse` interface with success, data, and error fields
+    - [ ] 3.1.3 Define `ScraperRequestBody` interface for API input validation
+    - [ ] 3.1.4 Define `PlatformType` and `ScrapeStatus` types
+    - [ ] 3.1.5 Export all types for use across the application
+  - [ ] 3.2 Create `lib/scraper/url-validator.ts` with URL validation logic:
+    - [ ] 3.2.1 Create `validateUrl` function that takes a URL string and returns platform type or null
+    - [ ] 3.2.2 Create `isInstagramUrl` helper to validate Instagram post/reel URLs (format: instagram.com/p/{id} or instagram.com/reel/{id})
+    - [ ] 3.2.3 Create `isTikTokUrl` helper to validate TikTok video URLs (format: tiktok.com/@{user}/video/{id})
+    - [ ] 3.2.4 Create `extractPostId` function to extract post ID from validated URLs
+    - [ ] 3.2.5 Handle URL variations (http/https, www/non-www, trailing slashes)
+  - [ ] 3.3 Create `lib/scraper/url-validator.test.ts` with comprehensive tests:
+    - [ ] 3.3.1 Test valid Instagram post URLs
+    - [ ] 3.3.2 Test valid Instagram reel URLs
+    - [ ] 3.3.3 Test valid TikTok video URLs
+    - [ ] 3.3.4 Test invalid URLs return null
+    - [ ] 3.3.5 Test URL variations (http/https, www, trailing slashes)
+    - [ ] 3.3.6 Test extractPostId for both platforms
+  - [ ] 3.4 Create `lib/scraper/database.ts` with database operations:
+    - [ ] 3.4.1 Create `getCachedContent` function to query scraped_content by URL
+    - [ ] 3.4.2 Create `upsertScrapedContent` function to insert or update scraped content
+    - [ ] 3.4.3 Create `logFailedScrape` function to insert into scraping_logs table
+    - [ ] 3.4.4 Create helper to transform database rows to ScrapedContent interface
+    - [ ] 3.4.5 Create helper to transform ScrapedContent to database insert format
+    - [ ] 3.4.6 Import and use Drizzle ORM client from `db/index.ts`
+  - [ ] 3.5 Create `lib/scraper/database.test.ts` with database operation tests:
+    - [ ] 3.5.1 Mock Drizzle ORM database client
+    - [ ] 3.5.2 Test getCachedContent returns cached data when URL exists
+    - [ ] 3.5.3 Test getCachedContent returns null when URL doesn't exist
+    - [ ] 3.5.4 Test upsertScrapedContent inserts new records
+    - [ ] 3.5.5 Test upsertScrapedContent updates existing records (force re-scrape)
+    - [ ] 3.5.6 Test logFailedScrape writes to scraping_logs table
+    - [ ] 3.5.7 Test data transformation helpers
+
+- [ ] 4.0 Implement platform-specific scrapers
+  - [ ] 4.1 Install required dependencies:
+    - [ ] 4.1.1 Run `npm install axios cheerio` for HTTP requests and HTML parsing
+    - [ ] 4.1.2 Verify dependencies are added to package.json
+  - [ ] 4.2 Create `lib/scraper/instagram-scraper.ts`:
+    - [ ] 4.2.1 Create `scrapeInstagram` async function that takes a URL and returns ScrapedContent or throws error
+    - [ ] 4.2.2 Implement HTTP request with proper user-agent headers
+    - [ ] 4.2.3 Parse HTML response using cheerio to extract metadata
+    - [ ] 4.2.4 Extract post ID, title/caption from meta tags or JSON-LD
+    - [ ] 4.2.5 Extract author information (username, display name, profile URL, avatar)
+    - [ ] 4.2.6 Extract media URLs (video URL, cover image)
+    - [ ] 4.2.7 Extract engagement metrics (likes, comments, views if available)
+    - [ ] 4.2.8 Extract hashtags and mentions from caption using regex
+    - [ ] 4.2.9 Extract timestamp and location if available
+    - [ ] 4.2.10 Return null for unavailable fields, track them in an array
+    - [ ] 4.2.11 Add error handling with descriptive messages
+    - [ ] 4.2.12 Add 30-second timeout to HTTP requests
+  - [ ] 4.3 Create `lib/scraper/instagram-scraper.test.ts`:
+    - [ ] 4.3.1 Mock axios for HTTP requests
+    - [ ] 4.3.2 Test successful Instagram post scraping with complete data
+    - [ ] 4.3.3 Test Instagram reel scraping
+    - [ ] 4.3.4 Test handling of missing fields (return null)
+    - [ ] 4.3.5 Test error handling for network failures
+    - [ ] 4.3.6 Test timeout handling
+    - [ ] 4.3.7 Test hashtag and mention extraction
+  - [ ] 4.4 Create `lib/scraper/tiktok-scraper.ts`:
+    - [ ] 4.4.1 Create `scrapeTikTok` async function that takes a URL and returns ScrapedContent or throws error
+    - [ ] 4.4.2 Implement HTTP request with proper user-agent headers
+    - [ ] 4.4.3 Parse HTML response to extract metadata
+    - [ ] 4.4.4 Extract video ID, title/description
+    - [ ] 4.4.5 Extract author information (username, display name, profile URL, avatar)
+    - [ ] 4.4.6 Extract media URLs (video URL, cover image)
+    - [ ] 4.4.7 Extract engagement metrics (likes, comments, shares, views)
+    - [ ] 4.4.8 Extract hashtags and mentions from description
+    - [ ] 4.4.9 Extract music information (title, artist, URL) specific to TikTok
+    - [ ] 4.4.10 Extract timestamp if available
+    - [ ] 4.4.11 Return null for unavailable fields, track them in an array
+    - [ ] 4.4.12 Add error handling with descriptive messages
+    - [ ] 4.4.13 Add 30-second timeout to HTTP requests
+  - [ ] 4.5 Create `lib/scraper/tiktok-scraper.test.ts`:
+    - [ ] 4.5.1 Mock axios for HTTP requests
+    - [ ] 4.5.2 Test successful TikTok video scraping with complete data
+    - [ ] 4.5.3 Test music info extraction (TikTok-specific)
+    - [ ] 4.5.4 Test handling of missing fields (return null)
+    - [ ] 4.5.5 Test error handling for network failures
+    - [ ] 4.5.6 Test timeout handling
+    - [ ] 4.5.7 Test hashtag and mention extraction
+
+- [ ] 5.0 Build API endpoint with rate limiting
+  - [ ] 5.1 Create `lib/scraper/rate-limiter.ts`:
+    - [ ] 5.1.1 Create in-memory rate limiter using Map to track requests per IP
+    - [ ] 5.1.2 Implement `checkRateLimit` function (max 10 requests per minute per IP)
+    - [ ] 5.1.3 Implement sliding window algorithm for accurate rate limiting
+    - [ ] 5.1.4 Return rate limit info (remaining, reset timestamp)
+    - [ ] 5.1.5 Add configurable rate limit parameters (from env or defaults)
+    - [ ] 5.1.6 Implement cleanup mechanism for old entries
+  - [ ] 5.2 Create `lib/scraper/rate-limiter.test.ts`:
+    - [ ] 5.2.1 Test rate limit allows requests under threshold
+    - [ ] 5.2.2 Test rate limit blocks requests over threshold
+    - [ ] 5.2.3 Test rate limit resets after time window
+    - [ ] 5.2.4 Test multiple IPs are tracked independently
+    - [ ] 5.2.5 Test rate limit info is returned correctly
+  - [ ] 5.3 Create `app/api/scraper/route.ts`:
+    - [ ] 5.3.1 Import all scraper modules (validators, scrapers, database, rate limiter, types)
+    - [ ] 5.3.2 Create POST handler function following Next.js 15 App Router conventions
+    - [ ] 5.3.3 Extract and validate request body using Zod schema (url: string, force?: boolean)
+    - [ ] 5.3.4 Get client IP from request headers for rate limiting
+    - [ ] 5.3.5 Check rate limit and return 429 if exceeded
+    - [ ] 5.3.6 Validate URL format using url-validator, return 400 if invalid
+    - [ ] 5.3.7 Check database cache using getCachedContent, return cached data if found and force=false
+    - [ ] 5.3.8 Determine platform and call appropriate scraper (Instagram or TikTok)
+    - [ ] 5.3.9 Track scrape start time for performance monitoring
+    - [ ] 5.3.10 Wrap scraper call in try-catch for error handling
+    - [ ] 5.3.11 On success: upsert scraped content to database, return 200 with ScraperResponse
+    - [ ] 5.3.12 On failure: log to scraping_logs table with error details, return 500 with error message
+    - [ ] 5.3.13 Include rate limit headers in all responses (X-RateLimit-Remaining, X-RateLimit-Reset)
+    - [ ] 5.3.14 Track unavailable fields and include in failure logs
+  - [ ] 5.4 Update `middleware.ts`:
+    - [ ] 5.4.1 Add `/api/scraper` to public routes (no authentication required)
+    - [ ] 5.4.2 Verify middleware doesn't interfere with scraper endpoint
+
+- [ ] 6.0 Testing and validation
+  - [ ] 6.1 Create `app/api/scraper/__tests__/route.test.ts`:
+    - [ ] 6.1.1 Mock all dependencies (database, scrapers, rate limiter)
+    - [ ] 6.1.2 Test successful scrape with valid Instagram URL
+    - [ ] 6.1.3 Test successful scrape with valid TikTok URL
+    - [ ] 6.1.4 Test cache hit returns cached data (force=false)
+    - [ ] 6.1.5 Test force re-scrape bypasses cache (force=true)
+    - [ ] 6.1.6 Test invalid URL returns 400 error
+    - [ ] 6.1.7 Test rate limit exceeded returns 429 error
+    - [ ] 6.1.8 Test scraper failure returns 500 error and logs to database
+    - [ ] 6.1.9 Test response includes correct rate limit headers
+    - [ ] 6.1.10 Test error logging captures all required metadata
+  - [ ] 6.2 Run all unit tests:
+    - [ ] 6.2.1 Run `npm run test` to execute all tests
+    - [ ] 6.2.2 Verify all tests pass with 100% success rate
+    - [ ] 6.2.3 Fix any failing tests
+  - [ ] 6.3 Manual API testing:
+    - [ ] 6.3.1 Start dev server with `npm run dev`
+    - [ ] 6.3.2 Test POST request to `/api/scraper` with valid Instagram URL
+    - [ ] 6.3.3 Test POST request with valid TikTok URL
+    - [ ] 6.3.4 Test cache behavior (same URL twice without force)
+    - [ ] 6.3.5 Test force re-scrape (same URL with force=true)
+    - [ ] 6.3.6 Test rate limiting (send 11+ requests rapidly)
+    - [ ] 6.3.7 Test invalid URL handling
+    - [ ] 6.3.8 Verify data is correctly stored in database using `npm run db:studio`
+    - [ ] 6.3.9 Verify failed scrapes are logged in scraping_logs table
+
+- [ ] 7.0 Final integration and documentation
+  - [ ] 7.1 Run linting and formatting:
+    - [ ] 7.1.1 Run `npm run lint` to check for code quality issues
+    - [ ] 7.1.2 Fix any linting errors or warnings
+    - [ ] 7.1.3 Run `npm run format` to auto-format code
+  - [ ] 7.2 Run build verification:
+    - [ ] 7.2.1 Run `npm run build --turbopack` to verify production build
+    - [ ] 7.2.2 Fix any build errors
+  - [ ] 7.3 Add environment variables documentation:
+    - [ ] 7.3.1 Document any required environment variables in `.env.example` if needed
+    - [ ] 7.3.2 Document rate limit configuration options
+  - [ ] 7.4 Code review and cleanup:
+    - [ ] 7.4.1 Review all new files for code quality and consistency
+    - [ ] 7.4.2 Remove any console.logs or debug code
+    - [ ] 7.4.3 Ensure all functions have proper TypeScript types
+    - [ ] 7.4.4 Verify error messages are descriptive and user-friendly
+  - [ ] 7.5 Git commit:
+    - [ ] 7.5.1 Stage all changes with `git add .`
+    - [ ] 7.5.2 Commit with message: "feat: implement social media scraper API for Instagram and TikTok"
+    - [ ] 7.5.3 Push branch to remote with `git push -u origin feature/0002-social-media-scraper`
