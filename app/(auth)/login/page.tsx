@@ -1,8 +1,10 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,34 +13,52 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { validateEmail } from "@/lib/auth/validation";
+import {
+  type LoginFormData,
+  loginSchema,
+  type MagicLinkFormData,
+  magicLinkSchema,
+} from "@/lib/auth/schemas";
 import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
 
-  async function handleMagicLink(e: React.FormEvent) {
-    e.preventDefault();
+  const magicLinkForm = useForm<MagicLinkFormData>({
+    resolver: zodResolver(magicLinkSchema),
+    defaultValues: {
+      email: "",
+    },
+  });
+
+  const loginForm = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+
+  async function handleMagicLink(data: MagicLinkFormData) {
     setIsLoading(true);
     setError("");
     setMessage("");
 
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
-      setIsLoading(false);
-      return;
-    }
-
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithOtp({
-      email,
+      email: data.email,
       options: {
         emailRedirectTo: `${window.location.origin}/auth/callback`,
       },
@@ -53,28 +73,15 @@ export default function LoginPage() {
     setIsLoading(false);
   }
 
-  async function handleEmailPassword(e: React.FormEvent) {
-    e.preventDefault();
+  async function handleEmailPassword(data: LoginFormData) {
     setIsLoading(true);
     setError("");
     setMessage("");
 
-    if (!validateEmail(email)) {
-      setError("Please enter a valid email address");
-      setIsLoading(false);
-      return;
-    }
-
-    if (!password) {
-      setError("Please enter your password");
-      setIsLoading(false);
-      return;
-    }
-
     const supabase = createClient();
     const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
+      email: data.email,
+      password: data.password,
     });
 
     if (error) {
@@ -108,24 +115,36 @@ export default function LoginPage() {
             </div>
           )}
 
-          <form onSubmit={handleMagicLink} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="you@example.com"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                disabled={isLoading}
+          <Form {...magicLinkForm}>
+            <form
+              onSubmit={magicLinkForm.handleSubmit(handleMagicLink)}
+              className="space-y-4"
+              noValidate
+            >
+              <FormField
+                control={magicLinkForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="you@example.com"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
               />
-            </div>
 
-            <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? "Sending..." : "Send Magic Link"}
-            </Button>
-          </form>
+              <Button type="submit" disabled={isLoading} className="w-full">
+                {isLoading ? "Sending..." : "Send Magic Link"}
+              </Button>
+            </form>
+          </Form>
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">
@@ -138,29 +157,60 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <form onSubmit={handleEmailPassword} className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
-                disabled={isLoading}
-              />
-            </div>
-
-            <Button
-              type="submit"
-              disabled={isLoading}
-              variant="secondary"
-              className="w-full"
+          <Form {...loginForm}>
+            <form
+              onSubmit={loginForm.handleSubmit(handleEmailPassword)}
+              className="space-y-4"
+              noValidate
             >
-              {isLoading ? "Signing in..." : "Sign In with Password"}
-            </Button>
-          </form>
+              <FormField
+                control={loginForm.control}
+                name="email"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Email</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="email"
+                        placeholder="you@example.com"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <FormField
+                control={loginForm.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="password"
+                        placeholder="••••••••"
+                        disabled={isLoading}
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
+              <Button
+                type="submit"
+                disabled={isLoading}
+                variant="secondary"
+                className="w-full"
+              >
+                {isLoading ? "Signing in..." : "Sign In with Password"}
+              </Button>
+            </form>
+          </Form>
 
           <div className="text-center space-y-2 text-sm">
             <Link

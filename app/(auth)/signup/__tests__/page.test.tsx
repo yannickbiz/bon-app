@@ -187,7 +187,7 @@ describe("SignupPage", () => {
     expect(mockSignUp).not.toHaveBeenCalled();
   });
 
-  it("should show multiple password errors joined with period", async () => {
+  it("should show first password error for invalid password", async () => {
     render(<SignupPage />);
 
     const emailInput = screen.getByLabelText("Email");
@@ -199,10 +199,10 @@ describe("SignupPage", () => {
     fireEvent.submit(form);
 
     await waitFor(() => {
-      const errorText = screen.getByText(
-        /Password must be at least 8 characters/,
-      );
-      expect(errorText.textContent).toContain(".");
+      // React Hook Form shows the first error that fails
+      expect(
+        screen.getByText(/Password must be at least 8 characters long/),
+      ).toBeTruthy();
     });
 
     expect(mockSignUp).not.toHaveBeenCalled();
@@ -246,9 +246,11 @@ describe("SignupPage", () => {
     fireEvent.change(passwordInput, { target: { value: "Test123!@#" } });
     fireEvent.submit(form);
 
-    expect(
-      screen.getByRole("button", { name: "Creating account..." }),
-    ).toBeTruthy();
+    await waitFor(() => {
+      expect(
+        screen.getByRole("button", { name: "Creating account..." }),
+      ).toBeTruthy();
+    });
     expect(emailInput).toHaveProperty("disabled", true);
     expect(passwordInput).toHaveProperty("disabled", true);
 
