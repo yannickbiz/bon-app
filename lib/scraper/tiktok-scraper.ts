@@ -23,6 +23,7 @@ export async function scrapeTikTok(url: string): Promise<ScrapedContent> {
     const $ = cheerio.load(response.data);
     const postId = extractPostId(url) ?? "";
 
+    // biome-ignore lint/suspicious/noExplicitAny: External JSON data from scraped HTML
     let jsonData: any = null;
     $("script#__UNIVERSAL_DATA_FOR_REHYDRATION__").each((_i, elem) => {
       try {
@@ -86,6 +87,7 @@ export async function scrapeTikTok(url: string): Promise<ScrapedContent> {
 
 function extractTitle(
   $: cheerio.CheerioAPI,
+  // biome-ignore lint/suspicious/noExplicitAny: External JSON data
   jsonData: any,
   unavailableFields: string[],
 ): string | null {
@@ -113,6 +115,7 @@ function extractTitle(
 
 function extractAuthor(
   _$: cheerio.CheerioAPI,
+  // biome-ignore lint/suspicious/noExplicitAny: External JSON data
   jsonData: any,
   url: string,
   unavailableFields: string[],
@@ -163,6 +166,7 @@ function extractAuthor(
 
 function extractMedia(
   $: cheerio.CheerioAPI,
+  // biome-ignore lint/suspicious/noExplicitAny: External JSON data
   jsonData: any,
   unavailableFields: string[],
 ): { videoUrl: string | null; coverImageUrl: string | null } {
@@ -201,6 +205,7 @@ function extractMedia(
 
 function extractEngagement(
   _$: cheerio.CheerioAPI,
+  // biome-ignore lint/suspicious/noExplicitAny: External JSON data
   jsonData: any,
   unavailableFields: string[],
 ): ScrapedContent["engagement"] {
@@ -264,6 +269,7 @@ function extractHashtagsAndMentions(text: string | null): {
 
 function extractTimestamp(
   _$: cheerio.CheerioAPI,
+  // biome-ignore lint/suspicious/noExplicitAny: External JSON data
   jsonData: any,
   unavailableFields: string[],
 ): string | null {
@@ -282,6 +288,7 @@ function extractTimestamp(
 }
 
 function extractMusicInfo(
+  // biome-ignore lint/suspicious/noExplicitAny: External JSON data
   jsonData: any,
   unavailableFields: string[],
 ): ScrapedContent["musicInfo"] {
