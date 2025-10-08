@@ -41,7 +41,7 @@
   - [x] 2.7 Run `npm run db:push` to apply the schema to the database (skipped - no DATABASE_URL configured)
   - [x] 2.8 Verify tables were created using `npm run db:studio` (skipped - no DATABASE_URL configured)
 
-- [ ] 3.0 Create core scraper infrastructure
+- [x] 3.0 Create core scraper infrastructure
   - [x] 3.1 Create `lib/scraper/types.ts` with TypeScript interfaces:
     - [x] 3.1.1 Define `ScrapedContent` interface matching the PRD specification
     - [x] 3.1.2 Define `ScraperResponse` interface with success, data, and error fields
@@ -78,52 +78,52 @@
     - [x] 3.5.7 Test data transformation helpers
 
 - [ ] 4.0 Implement platform-specific scrapers
-  - [ ] 4.1 Install required dependencies:
-    - [ ] 4.1.1 Run `npm install axios cheerio` for HTTP requests and HTML parsing
-    - [ ] 4.1.2 Verify dependencies are added to package.json
-  - [ ] 4.2 Create `lib/scraper/instagram-scraper.ts`:
-    - [ ] 4.2.1 Create `scrapeInstagram` async function that takes a URL and returns ScrapedContent or throws error
-    - [ ] 4.2.2 Implement HTTP request with proper user-agent headers
-    - [ ] 4.2.3 Parse HTML response using cheerio to extract metadata
-    - [ ] 4.2.4 Extract post ID, title/caption from meta tags or JSON-LD
-    - [ ] 4.2.5 Extract author information (username, display name, profile URL, avatar)
-    - [ ] 4.2.6 Extract media URLs (video URL, cover image)
-    - [ ] 4.2.7 Extract engagement metrics (likes, comments, views if available)
-    - [ ] 4.2.8 Extract hashtags and mentions from caption using regex
-    - [ ] 4.2.9 Extract timestamp and location if available
-    - [ ] 4.2.10 Return null for unavailable fields, track them in an array
-    - [ ] 4.2.11 Add error handling with descriptive messages
-    - [ ] 4.2.12 Add 30-second timeout to HTTP requests
-  - [ ] 4.3 Create `lib/scraper/instagram-scraper.test.ts`:
-    - [ ] 4.3.1 Mock axios for HTTP requests
-    - [ ] 4.3.2 Test successful Instagram post scraping with complete data
-    - [ ] 4.3.3 Test Instagram reel scraping
-    - [ ] 4.3.4 Test handling of missing fields (return null)
-    - [ ] 4.3.5 Test error handling for network failures
-    - [ ] 4.3.6 Test timeout handling
-    - [ ] 4.3.7 Test hashtag and mention extraction
-  - [ ] 4.4 Create `lib/scraper/tiktok-scraper.ts`:
-    - [ ] 4.4.1 Create `scrapeTikTok` async function that takes a URL and returns ScrapedContent or throws error
-    - [ ] 4.4.2 Implement HTTP request with proper user-agent headers
-    - [ ] 4.4.3 Parse HTML response to extract metadata
-    - [ ] 4.4.4 Extract video ID, title/description
-    - [ ] 4.4.5 Extract author information (username, display name, profile URL, avatar)
-    - [ ] 4.4.6 Extract media URLs (video URL, cover image)
-    - [ ] 4.4.7 Extract engagement metrics (likes, comments, shares, views)
-    - [ ] 4.4.8 Extract hashtags and mentions from description
-    - [ ] 4.4.9 Extract music information (title, artist, URL) specific to TikTok
-    - [ ] 4.4.10 Extract timestamp if available
-    - [ ] 4.4.11 Return null for unavailable fields, track them in an array
-    - [ ] 4.4.12 Add error handling with descriptive messages
-    - [ ] 4.4.13 Add 30-second timeout to HTTP requests
-  - [ ] 4.5 Create `lib/scraper/tiktok-scraper.test.ts`:
-    - [ ] 4.5.1 Mock axios for HTTP requests
-    - [ ] 4.5.2 Test successful TikTok video scraping with complete data
-    - [ ] 4.5.3 Test music info extraction (TikTok-specific)
-    - [ ] 4.5.4 Test handling of missing fields (return null)
-    - [ ] 4.5.5 Test error handling for network failures
-    - [ ] 4.5.6 Test timeout handling
-    - [ ] 4.5.7 Test hashtag and mention extraction
+  - [x] 4.1 Install required dependencies:
+    - [x] 4.1.1 Run `npm install axios cheerio` for HTTP requests and HTML parsing
+    - [x] 4.1.2 Verify dependencies are added to package.json
+  - [x] 4.2 Create `lib/scraper/instagram-scraper.ts`:
+    - [x] 4.2.1 Create `scrapeInstagram` async function that takes a URL and returns ScrapedContent or throws error
+    - [x] 4.2.2 Implement HTTP request with proper user-agent headers
+    - [x] 4.2.3 Parse HTML response using cheerio to extract metadata
+    - [x] 4.2.4 Extract post ID, title/caption from meta tags or JSON-LD
+    - [x] 4.2.5 Extract author information (username, display name, profile URL, avatar)
+    - [x] 4.2.6 Extract media URLs (video URL, cover image)
+    - [x] 4.2.7 Extract engagement metrics (likes, comments, views if available)
+    - [x] 4.2.8 Extract hashtags and mentions from caption using regex
+    - [x] 4.2.9 Extract timestamp and location if available
+    - [x] 4.2.10 Return null for unavailable fields, track them in an array
+    - [x] 4.2.11 Add error handling with descriptive messages
+    - [x] 4.2.12 Add 30-second timeout to HTTP requests
+  - [x] 4.3 Create `lib/scraper/instagram-scraper.test.ts`:
+    - [x] 4.3.1 Mock axios for HTTP requests
+    - [x] 4.3.2 Test successful Instagram post scraping with complete data
+    - [x] 4.3.3 Test Instagram reel scraping
+    - [x] 4.3.4 Test handling of missing fields (return null)
+    - [x] 4.3.5 Test error handling for network failures
+    - [x] 4.3.6 Test timeout handling
+    - [x] 4.3.7 Test hashtag and mention extraction
+  - [x] 4.4 Create `lib/scraper/tiktok-scraper.ts`:
+    - [x] 4.4.1 Create `scrapeTikTok` async function that takes a URL and returns ScrapedContent or throws error
+    - [x] 4.4.2 Implement HTTP request with proper user-agent headers
+    - [x] 4.4.3 Parse HTML response to extract metadata
+    - [x] 4.4.4 Extract video ID, title/description
+    - [x] 4.4.5 Extract author information (username, display name, profile URL, avatar)
+    - [x] 4.4.6 Extract media URLs (video URL, cover image)
+    - [x] 4.4.7 Extract engagement metrics (likes, comments, shares, views)
+    - [x] 4.4.8 Extract hashtags and mentions from description
+    - [x] 4.4.9 Extract music information (title, artist, URL) specific to TikTok
+    - [x] 4.4.10 Extract timestamp if available
+    - [x] 4.4.11 Return null for unavailable fields, track them in an array
+    - [x] 4.4.12 Add error handling with descriptive messages
+    - [x] 4.4.13 Add 30-second timeout to HTTP requests
+  - [x] 4.5 Create `lib/scraper/tiktok-scraper.test.ts`:
+    - [x] 4.5.1 Mock axios for HTTP requests
+    - [x] 4.5.2 Test successful TikTok video scraping with complete data
+    - [x] 4.5.3 Test music info extraction (TikTok-specific)
+    - [x] 4.5.4 Test handling of missing fields (return null)
+    - [x] 4.5.5 Test error handling for network failures
+    - [x] 4.5.6 Test timeout handling
+    - [x] 4.5.7 Test hashtag and mention extraction
 
 - [ ] 5.0 Build API endpoint with rate limiting
   - [ ] 5.1 Create `lib/scraper/rate-limiter.ts`:
