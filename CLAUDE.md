@@ -152,3 +152,4 @@ SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
 - **Middleware runs on all routes** except those in `publicRoutes` array and static assets
 - **Tests should be colocated** with components in `__tests__/` folders
 - **Use TDD approach** when following the 3-File System workflow
+- When asked to commit, reference to @agent-prompts/commit.md for instructions about the commit message
