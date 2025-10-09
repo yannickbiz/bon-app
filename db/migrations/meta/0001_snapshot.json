@@ -1,6 +1,6 @@
 {
-  "id": "bd74c105-d5bb-4539-88fd-50fde62008bf",
-  "prevId": "210b0579-8cab-422f-b4b5-286a786e088b",
+  "id": "062d27c6-4d1e-49c5-a963-d0530c636872",
+  "prevId": "bd74c105-d5bb-4539-88fd-50fde62008bf",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -157,13 +157,6 @@
           "notNull": true,
           "default": "'[]'::jsonb"
         },
-        "mentions": {
-          "name": "mentions",
-          "type": "jsonb",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "'[]'::jsonb"
-        },
         "post_timestamp": {
           "name": "post_timestamp",
           "type": "timestamp",
@@ -175,19 +168,6 @@
           "type": "jsonb",
           "primaryKey": false,
           "notNull": false
-        },
-        "location": {
-          "name": "location",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "is_video": {
-          "name": "is_video",
-          "type": "boolean",
-          "primaryKey": false,
-          "notNull": true,
-          "default": true
         },
         "created_at": {
           "name": "created_at",

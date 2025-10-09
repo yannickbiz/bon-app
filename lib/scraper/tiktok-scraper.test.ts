@@ -17,24 +17,33 @@ describe("tiktok-scraper", () => {
         <html>
         <head>
           <meta property="og:description" content="Amazing video! #viral @friend">
-          <script type="application/ld+json">
+          <script id="__UNIVERSAL_DATA_FOR_REHYDRATION__">
           {
-            "@type": "VideoObject",
-            "description": "Amazing video! #viral @friend",
-            "contentUrl": "https://example.com/video.mp4",
-            "thumbnailUrl": "https://example.com/cover.jpg",
-            "author": {
-              "identifier": { "value": "tiktoker" },
-              "name": "TikTok User",
-              "url": "https://tiktok.com/@tiktoker",
-              "image": "https://example.com/avatar.jpg"
-            },
-            "uploadDate": "2024-01-01T00:00:00Z",
-            "interactionStatistic": [
-              { "interactionType": "http://schema.org/LikeAction", "userInteractionCount": "1000" },
-              { "interactionType": "http://schema.org/CommentAction", "userInteractionCount": "100" },
-              { "interactionType": "http://schema.org/WatchAction", "userInteractionCount": "10000" }
-            ]
+            "__DEFAULT_SCOPE__": {
+              "webapp.video-detail": {
+                "itemInfo": {
+                  "itemStruct": {
+                    "desc": "Amazing video! #viral @friend",
+                    "author": {
+                      "uniqueId": "tiktoker",
+                      "nickname": "TikTok User",
+                      "avatarThumb": "https://example.com/avatar.jpg"
+                    },
+                    "video": {
+                      "playAddr": "https://example.com/video.mp4",
+                      "cover": "https://example.com/cover.jpg"
+                    },
+                    "stats": {
+                      "diggCount": 1000,
+                      "commentCount": 100,
+                      "shareCount": 50,
+                      "playCount": 10000
+                    },
+                    "createTime": "1704067200"
+                  }
+                }
+              }
+            }
           }
           </script>
         </head>
@@ -55,11 +64,9 @@ describe("tiktok-scraper", () => {
       expect(result.videoUrl).toBe("https://example.com/video.mp4");
       expect(result.coverImageUrl).toBe("https://example.com/cover.jpg");
       expect(result.hashtags).toContain("viral");
-      expect(result.mentions).toContain("friend");
       expect(result.engagement.likes).toBe(1000);
       expect(result.engagement.comments).toBe(100);
       expect(result.engagement.views).toBe(10000);
-      expect(result.isVideo).toBe(true);
     });
 
     it("should extract music info for TikTok", async () => {
@@ -119,7 +126,17 @@ describe("tiktok-scraper", () => {
         <!DOCTYPE html>
         <html>
         <head>
-          <meta property="og:url" content="https://tiktok.com/@user/video/123">
+          <script id="__UNIVERSAL_DATA_FOR_REHYDRATION__">
+          {
+            "__DEFAULT_SCOPE__": {
+              "webapp.video-detail": {
+                "itemInfo": {
+                  "itemStruct": {}
+                }
+              }
+            }
+          }
+          </script>
         </head>
         </html>
       `;
@@ -154,17 +171,25 @@ describe("tiktok-scraper", () => {
       ).rejects.toThrow("Failed to scrape TikTok URL");
     });
 
-    it("should extract hashtags and mentions correctly", async () => {
+    it("should extract hashtags correctly", async () => {
       const mockHtml = `
         <!DOCTYPE html>
         <html>
         <head>
-          <meta property="og:description" content="#fyp #viral @creator1 @creator2 Amazing!">
-          <script type="application/ld+json">
+          <script id="__UNIVERSAL_DATA_FOR_REHYDRATION__">
           {
-            "@type": "VideoObject",
-            "description": "#fyp #viral @creator1 @creator2 Amazing!",
-            "author": { "identifier": { "value": "testuser" } }
+            "__DEFAULT_SCOPE__": {
+              "webapp.video-detail": {
+                "itemInfo": {
+                  "itemStruct": {
+                    "desc": "#fyp #viral @creator1 @creator2 Amazing!",
+                    "author": { "uniqueId": "testuser" },
+                    "video": {},
+                    "stats": {}
+                  }
+                }
+              }
+            }
           }
           </script>
         </head>
@@ -176,7 +201,6 @@ describe("tiktok-scraper", () => {
       const result = await scrapeTikTok("https://tiktok.com/@test/video/999");
 
       expect(result.hashtags).toEqual(["fyp", "viral"]);
-      expect(result.mentions).toEqual(["creator1", "creator2"]);
     });
   });
 });

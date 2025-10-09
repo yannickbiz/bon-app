@@ -56,7 +56,6 @@ export const scrapedContent = pgTable("scraped_content", {
   views: integer("views"),
 
   hashtags: jsonb("hashtags").$type<string[]>().notNull().default([]),
-  mentions: jsonb("mentions").$type<string[]>().notNull().default([]),
 
   postTimestamp: timestamp("post_timestamp"),
 
@@ -65,9 +64,6 @@ export const scrapedContent = pgTable("scraped_content", {
     artist: string | null;
     url: string | null;
   } | null>(),
-
-  location: text("location"),
-  isVideo: boolean("is_video").notNull().default(true),
 
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),

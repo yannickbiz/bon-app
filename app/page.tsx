@@ -19,7 +19,7 @@ export default function Home() {
   const [result, setResult] = useState<ScraperResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent, force = false) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
@@ -31,7 +31,7 @@ export default function Home() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ url, force }),
+        body: JSON.stringify({ url }),
       });
 
       const data: ScraperResponse = await response.json();
@@ -48,7 +48,7 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col">
       <section className="flex-1 flex items-center justify-center px-4 py-12">
         <div className="container max-w-4xl">
           <div className="flex flex-col items-center text-center space-y-8">
@@ -70,10 +70,7 @@ export default function Home() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <form
-                  onSubmit={(e) => handleSubmit(e, false)}
-                  className="space-y-4"
-                >
+                <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="space-y-2">
                     <Label htmlFor="url">URL</Label>
                     <Input
@@ -86,19 +83,9 @@ export default function Home() {
                     />
                   </div>
 
-                  <div className="flex gap-2">
-                    <Button type="submit" disabled={loading} className="flex-1">
-                      {loading ? "Scraping..." : "Scrape URL"}
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      disabled={loading}
-                      onClick={(e) => handleSubmit(e, true)}
-                    >
-                      Force Re-scrape
-                    </Button>
-                  </div>
+                  <Button type="submit" disabled={loading} className="w-full">
+                    {loading ? "Scraping..." : "Scrape URL"}
+                  </Button>
                 </form>
 
                 {error && (

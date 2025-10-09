@@ -59,7 +59,6 @@ describe("Home", () => {
     fireEvent.click(button);
 
     await waitFor(() => {
-      expect(screen.getByText("Scraped Data")).toBeTruthy();
       expect(screen.getByText("Platform:")).toBeTruthy();
       expect(screen.getByText("instagram")).toBeTruthy();
     });

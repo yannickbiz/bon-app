@@ -22,15 +22,12 @@ export interface ScrapedContent {
     views: number | null;
   };
   hashtags: string[];
-  mentions: string[];
   timestamp: string | null;
   musicInfo: {
     title: string | null;
     artist: string | null;
     url: string | null;
   } | null;
-  location: string | null;
-  isVideo: boolean;
 }
 
 export interface ScraperResponse {

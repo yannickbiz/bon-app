@@ -92,15 +92,12 @@ function transformDbToScrapedContent(
       views: row.views,
     },
     hashtags: row.hashtags as string[],
-    mentions: row.mentions as string[],
     timestamp: row.postTimestamp?.toISOString() ?? null,
     musicInfo: row.musicInfo as {
       title: string | null;
       artist: string | null;
       url: string | null;
     } | null,
-    location: row.location,
-    isVideo: row.isVideo,
   };
 }
 
@@ -121,10 +118,7 @@ function transformScrapedContentToDb(content: ScrapedContent) {
     shares: content.engagement.shares,
     views: content.engagement.views,
     hashtags: content.hashtags,
-    mentions: content.mentions,
     postTimestamp: content.timestamp ? new Date(content.timestamp) : null,
     musicInfo: content.musicInfo,
-    location: content.location,
-    isVideo: content.isVideo,
   };
 }
