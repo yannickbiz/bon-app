@@ -4,6 +4,10 @@
 - `db/migrations/0002_flimsy_captain_marvel.sql` - Generated migration file for recipes schema
 - `.env.example` - Added AI recipe extraction environment variables
 - `package.json` - Added ai, @ai-sdk/groq, fluent-ffmpeg dependencies
+- `lib/ai/types.ts` - TypeScript interfaces for recipe extraction
+- `lib/ai/schemas.ts` - Zod schemas for recipe validation
+- `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service using Groq
+- `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction logic
 - `lib/ai/audio-transcription.ts` - Audio transcription service using Whisper API
@@ -59,17 +63,17 @@
   - [x] 3.4 Create Supabase Storage bucket named `video-processing` with appropriate access policies (private bucket, authenticated access only for uploads)
   - [x] 3.5 Configure bucket lifecycle rules to auto-delete files older than 24 hours
 
-- [ ] 4.0 Implement AI recipe extraction service from text content
-  - [ ] 4.1 Create `lib/ai/types.ts` with TypeScript interfaces: RecipeExtractionResult, ExtractedRecipe, RecipeExtractionInput
-  - [ ] 4.2 Create `lib/ai/schemas.ts` with Zod schemas for recipe validation (title, ingredients array, instructions array) matching PRD structure
-  - [ ] 4.3 Create `lib/ai/recipe-extractor.ts` with main extraction function `extractRecipe(input: RecipeExtractionInput): Promise<RecipeExtractionResult>`
-  - [ ] 4.4 Implement AI provider abstraction using Vercel AI SDK with support for Groq initially
-  - [ ] 4.5 Design and implement AI prompt for recipe extraction using structured output (zod schema) with clear instructions for title, ingredients, and instructions extraction
-  - [ ] 4.6 Implement confidence scoring logic based on completeness of extracted data
-  - [ ] 4.7 Implement validation to return null/error for non-recipe content
-  - [ ] 4.8 Implement rate limiting integration for AI API calls using existing rate-limiter pattern
-  - [ ] 4.9 Add error handling for AI API failures, timeouts, and rate limits
-  - [ ] 4.10 Write unit tests in `lib/ai/recipe-extractor.test.ts` for successful extraction, non-recipe content, API failures, validation, and edge cases
+- [x] 4.0 Implement AI recipe extraction service from text content
+  - [x] 4.1 Create `lib/ai/types.ts` with TypeScript interfaces: RecipeExtractionResult, ExtractedRecipe, RecipeExtractionInput
+  - [x] 4.2 Create `lib/ai/schemas.ts` with Zod schemas for recipe validation (title, ingredients array, instructions array) matching PRD structure
+  - [x] 4.3 Create `lib/ai/recipe-extractor.ts` with main extraction function `extractRecipe(input: RecipeExtractionInput): Promise<RecipeExtractionResult>`
+  - [x] 4.4 Implement AI provider abstraction using Vercel AI SDK with support for Groq initially
+  - [x] 4.5 Design and implement AI prompt for recipe extraction using structured output (zod schema) with clear instructions for title, ingredients, and instructions extraction
+  - [x] 4.6 Implement confidence scoring logic based on completeness of extracted data
+  - [x] 4.7 Implement validation to return null/error for non-recipe content
+  - [x] 4.8 Implement rate limiting integration for AI API calls using existing rate-limiter pattern
+  - [x] 4.9 Add error handling for AI API failures, timeouts, and rate limits
+  - [x] 4.10 Write unit tests in `lib/ai/recipe-extractor.test.ts` for successful extraction, non-recipe content, API failures, validation, and edge cases
 
 - [ ] 5.0 Implement video audio transcription pipeline
   - [ ] 5.1 Create `lib/supabase/storage.ts` with utilities: uploadFile, downloadFile, deleteFile, generateSignedUrl
