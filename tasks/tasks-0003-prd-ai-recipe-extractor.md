@@ -17,6 +17,12 @@
 - `lib/ai/recipe-extraction-workflow.ts` - Complete recipe extraction workflow with video/audio processing
 - `lib/scraper/database.ts` - Updated with recipe database functions (getScrapedContentById, upsertRecipe, getRecipeByScrapedContentId)
 - `app/api/scraper/route.ts` - Integrated recipe extraction trigger after successful scrape
+- `app/api/recipes/route.ts` - GET endpoint for listing all recipes (authenticated)
+- `app/api/recipes/[id]/route.ts` - GET endpoint for single recipe by ID (authenticated)
+- `app/api/recipes/save/route.ts` - POST endpoint to save recipe to user collection
+- `app/api/recipes/save/[recipeId]/route.ts` - DELETE endpoint to remove recipe from collection
+- `app/api/recipes/[id]/edit/route.ts` - PUT endpoint to edit user's custom recipe fields
+- `app/api/recipes/my-collection/route.ts` - GET endpoint for user's saved recipes
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction logic
 - `lib/ai/audio-transcription.ts` - Audio transcription service using Whisper API
@@ -111,18 +117,18 @@
   - [x] 6.9 Add error handling to prevent scraper failures if extraction fails
   - [x] 6.10 Update scraper tests in `app/api/scraper/__tests__/route.test.ts` to verify extraction integration
 
-- [ ] 7.0 Build recipe API endpoints for user interactions
-  - [ ] 7.1 Create `app/api/recipes/route.ts` with GET handler to list all recipes (requires authentication per PRD)
-  - [ ] 7.2 Create `app/api/recipes/[id]/route.ts` with GET handler to fetch single recipe by ID (requires authentication)
-  - [ ] 7.3 Create `app/api/recipes/save/route.ts` with POST handler to save recipe to user's collection (authenticated, validate user owns the save action)
-  - [ ] 7.4 Create `app/api/recipes/save/[recipeId]/route.ts` with DELETE handler to remove recipe from user's collection (authenticated, validate user owns the saved recipe)
-  - [ ] 7.5 Create `app/api/recipes/[id]/edit/route.ts` with PUT handler to update user's custom recipe fields (authenticated, validate user owns the saved recipe)
-  - [ ] 7.6 Create `app/api/recipes/my-collection/route.ts` with GET handler to retrieve user's saved recipes (authenticated)
-  - [ ] 7.7 Implement request validation using Zod schemas for all endpoints
-  - [ ] 7.8 Implement authentication checks using existing Supabase middleware patterns
-  - [ ] 7.9 Implement user ownership validation for edit and delete operations
-  - [ ] 7.10 Add proper HTTP status codes and error responses
-  - [ ] 7.11 Write unit tests for all API endpoints covering success cases, authentication failures, validation errors, and not found scenarios
+- [x] 7.0 Build recipe API endpoints for user interactions
+  - [x] 7.1 Create `app/api/recipes/route.ts` with GET handler to list all recipes (requires authentication per PRD)
+  - [x] 7.2 Create `app/api/recipes/[id]/route.ts` with GET handler to fetch single recipe by ID (requires authentication)
+  - [x] 7.3 Create `app/api/recipes/save/route.ts` with POST handler to save recipe to user's collection (authenticated, validate user owns the save action)
+  - [x] 7.4 Create `app/api/recipes/save/[recipeId]/route.ts` with DELETE handler to remove recipe from user's collection (authenticated, validate user owns the saved recipe)
+  - [x] 7.5 Create `app/api/recipes/[id]/edit/route.ts` with PUT handler to update user's custom recipe fields (authenticated, validate user owns the saved recipe)
+  - [x] 7.6 Create `app/api/recipes/my-collection/route.ts` with GET handler to retrieve user's saved recipes (authenticated)
+  - [x] 7.7 Implement request validation using Zod schemas for all endpoints
+  - [x] 7.8 Implement authentication checks using existing Supabase middleware patterns
+  - [x] 7.9 Implement user ownership validation for edit and delete operations
+  - [x] 7.10 Add proper HTTP status codes and error responses
+  - [x] 7.11 Write unit tests for all API endpoints covering success cases, authentication failures, validation errors, and not found scenarios
 
 - [ ] 8.0 Create recipe UI components
   - [ ] 8.1 Create `components/recipe/recipe-card.tsx` to display recipe with title, ingredients list, instructions list, and source link
