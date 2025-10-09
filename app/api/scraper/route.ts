@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { extractRecipeFromScrapedContent } from "@/lib/ai/recipe-extraction-workflow";
 import {
   getCachedContent,
   logFailedScrape,
@@ -110,7 +111,21 @@ export async function POST(request: NextRequest) {
         ? await scrapeInstagram(url)
         : await scrapeTikTok(url);
 
-    await upsertScrapedContent(scrapedData);
+    const { id: scrapedContentId } = await upsertScrapedContent(scrapedData);
+
+    extractRecipeFromScrapedContent(scrapedData, scrapedContentId)
+      .then((result) => {
+        if (result.success) {
+          console.log(
+            `Recipe extracted successfully: ${result.recipeId} (${result.processingTimeMs}ms)`,
+          );
+        } else {
+          console.error(`Recipe extraction failed: ${result.error}`);
+        }
+      })
+      .catch((error) => {
+        console.error("Recipe extraction workflow error:", error);
+      });
 
     return NextResponse.json(
       {

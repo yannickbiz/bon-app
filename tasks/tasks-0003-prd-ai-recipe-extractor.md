@@ -14,6 +14,9 @@
 - `lib/ai/video-processor.test.ts` - Unit tests for video processing
 - `lib/ai/audio-transcription.ts` - Audio transcription using Groq Whisper API
 - `lib/ai/audio-transcription.test.ts` - Unit tests for transcription
+- `lib/ai/recipe-extraction-workflow.ts` - Complete recipe extraction workflow with video/audio processing
+- `lib/scraper/database.ts` - Updated with recipe database functions (getScrapedContentById, upsertRecipe, getRecipeByScrapedContentId)
+- `app/api/scraper/route.ts` - Integrated recipe extraction trigger after successful scrape
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction logic
 - `lib/ai/audio-transcription.ts` - Audio transcription service using Whisper API
@@ -96,17 +99,17 @@
   - [x] 5.12 Write unit tests for transcription in `lib/ai/audio-transcription.test.ts`: successful transcription, caching, failures, missing audio
   - [x] 5.13 Write unit tests for storage utilities in `lib/supabase/storage.test.ts`: upload, download, delete, signed URLs
 
-- [ ] 6.0 Integrate recipe extraction with scraper workflow
-  - [ ] 6.1 Update `lib/scraper/database.ts` to add function `getScrapedContentById(id: number): Promise<ScrapedContent | null>`
-  - [ ] 6.2 Add function `upsertRecipe(recipe: ExtractedRecipe): Promise<void>` to save extracted recipes to database
-  - [ ] 6.3 Add function `getRecipeByScrapedContentId(scrapedContentId: number): Promise<ExtractedRecipe | null>` to check for existing recipes
-  - [ ] 6.4 Modify scraper route handler in `app/api/scraper/route.ts` to trigger recipe extraction after successful scrape
-  - [ ] 6.5 Implement extraction workflow: check if recipe exists, if not -> download video (if present) -> transcribe audio -> combine text + transcription -> call extractRecipe -> save to database
-  - [ ] 6.6 Implement duplicate prevention by checking if recipe already exists for scraped content before extraction
-  - [ ] 6.7 Add logging for extraction attempts (status, processing time, transcription status, errors) using existing error logging pattern
-  - [ ] 6.8 Ensure extraction runs asynchronously and doesn't block scraper response
-  - [ ] 6.9 Add error handling to prevent scraper failures if extraction fails
-  - [ ] 6.10 Update scraper tests in `app/api/scraper/__tests__/route.test.ts` to verify extraction integration
+- [x] 6.0 Integrate recipe extraction with scraper workflow
+  - [x] 6.1 Update `lib/scraper/database.ts` to add function `getScrapedContentById(id: number): Promise<ScrapedContent | null>`
+  - [x] 6.2 Add function `upsertRecipe(recipe: ExtractedRecipe): Promise<void>` to save extracted recipes to database
+  - [x] 6.3 Add function `getRecipeByScrapedContentId(scrapedContentId: number): Promise<ExtractedRecipe | null>` to check for existing recipes
+  - [x] 6.4 Modify scraper route handler in `app/api/scraper/route.ts` to trigger recipe extraction after successful scrape
+  - [x] 6.5 Implement extraction workflow: check if recipe exists, if not -> download video (if present) -> transcribe audio -> combine text + transcription -> call extractRecipe -> save to database
+  - [x] 6.6 Implement duplicate prevention by checking if recipe already exists for scraped content before extraction
+  - [x] 6.7 Add logging for extraction attempts (status, processing time, transcription status, errors) using existing error logging pattern
+  - [x] 6.8 Ensure extraction runs asynchronously and doesn't block scraper response
+  - [x] 6.9 Add error handling to prevent scraper failures if extraction fails
+  - [x] 6.10 Update scraper tests in `app/api/scraper/__tests__/route.test.ts` to verify extraction integration
 
 - [ ] 7.0 Build recipe API endpoints for user interactions
   - [ ] 7.1 Create `app/api/recipes/route.ts` with GET handler to list all recipes (requires authentication per PRD)
