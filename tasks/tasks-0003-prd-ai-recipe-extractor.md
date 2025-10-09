@@ -8,6 +8,12 @@
 - `lib/ai/schemas.ts` - Zod schemas for recipe validation
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service using Groq
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction
+- `lib/supabase/storage.ts` - Supabase Storage utilities for file operations
+- `lib/supabase/storage.test.ts` - Unit tests for storage operations
+- `lib/ai/video-processor.ts` - Video download and audio extraction with ffmpeg
+- `lib/ai/video-processor.test.ts` - Unit tests for video processing
+- `lib/ai/audio-transcription.ts` - Audio transcription using Groq Whisper API
+- `lib/ai/audio-transcription.test.ts` - Unit tests for transcription
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction logic
 - `lib/ai/audio-transcription.ts` - Audio transcription service using Whisper API
@@ -75,20 +81,20 @@
   - [x] 4.9 Add error handling for AI API failures, timeouts, and rate limits
   - [x] 4.10 Write unit tests in `lib/ai/recipe-extractor.test.ts` for successful extraction, non-recipe content, API failures, validation, and edge cases
 
-- [ ] 5.0 Implement video audio transcription pipeline
-  - [ ] 5.1 Create `lib/supabase/storage.ts` with utilities: uploadFile, downloadFile, deleteFile, generateSignedUrl
-  - [ ] 5.2 Create `lib/ai/video-processor.ts` with functions: downloadVideo, extractAudio, getVideoDuration, cleanupFiles
-  - [ ] 5.3 Implement video download function with file size validation (e.g., max 100MB) and store in Supabase Storage
-  - [ ] 5.4 Implement audio extraction using ffmpeg to convert video to audio format (e.g., mp3 or wav) and upload to Supabase Storage
-  - [ ] 5.5 Implement video duration check to enforce max duration limit (5 minutes per PRD)
-  - [ ] 5.6 Create `lib/ai/audio-transcription.ts` with function `transcribeAudio(audioUrl: string): Promise<string>`
-  - [ ] 5.7 Implement Whisper API integration (via Groq or OpenAI) for audio transcription
-  - [ ] 5.8 Implement transcription caching based on video URL to avoid re-transcribing same content
-  - [ ] 5.9 Implement graceful fallback for videos without audio or inaudible audio
-  - [ ] 5.10 Implement cleanup function to delete temporary video/audio files from Supabase Storage after processing
-  - [ ] 5.11 Write unit tests for video processing in `lib/ai/video-processor.test.ts`: download, extraction, duration check, cleanup
-  - [ ] 5.12 Write unit tests for transcription in `lib/ai/audio-transcription.test.ts`: successful transcription, caching, failures, missing audio
-  - [ ] 5.13 Write unit tests for storage utilities in `lib/supabase/storage.test.ts`: upload, download, delete, signed URLs
+- [x] 5.0 Implement video audio transcription pipeline
+  - [x] 5.1 Create `lib/supabase/storage.ts` with utilities: uploadFile, downloadFile, deleteFile, generateSignedUrl
+  - [x] 5.2 Create `lib/ai/video-processor.ts` with functions: downloadVideo, extractAudio, getVideoDuration, cleanupFiles
+  - [x] 5.3 Implement video download function with file size validation (e.g., max 100MB) and store in Supabase Storage
+  - [x] 5.4 Implement audio extraction using ffmpeg to convert video to audio format (e.g., mp3 or wav) and upload to Supabase Storage
+  - [x] 5.5 Implement video duration check to enforce max duration limit (5 minutes per PRD)
+  - [x] 5.6 Create `lib/ai/audio-transcription.ts` with function `transcribeAudio(audioUrl: string): Promise<string>`
+  - [x] 5.7 Implement Whisper API integration (via Groq) for audio transcription
+  - [x] 5.8 Implement transcription caching based on video URL to avoid re-transcribing same content
+  - [x] 5.9 Implement graceful fallback for videos without audio or inaudible audio
+  - [x] 5.10 Implement cleanup function to delete temporary video/audio files from Supabase Storage after processing
+  - [x] 5.11 Write unit tests for video processing in `lib/ai/video-processor.test.ts`: download, extraction, duration check, cleanup
+  - [x] 5.12 Write unit tests for transcription in `lib/ai/audio-transcription.test.ts`: successful transcription, caching, failures, missing audio
+  - [x] 5.13 Write unit tests for storage utilities in `lib/supabase/storage.test.ts`: upload, download, delete, signed URLs
 
 - [ ] 6.0 Integrate recipe extraction with scraper workflow
   - [ ] 6.1 Update `lib/scraper/database.ts` to add function `getScrapedContentById(id: number): Promise<ScrapedContent | null>`
