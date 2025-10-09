@@ -23,6 +23,10 @@
 - `app/api/recipes/save/[recipeId]/route.ts` - DELETE endpoint to remove recipe from collection
 - `app/api/recipes/[id]/edit/route.ts` - PUT endpoint to edit user's custom recipe fields
 - `app/api/recipes/my-collection/route.ts` - GET endpoint for user's saved recipes
+- `components/recipe/recipe-card.tsx` - Recipe display component with ingredients, instructions, and metadata
+- `components/recipe/save-recipe-button.tsx` - Save/unsave button with optimistic updates
+- `components/recipe/recipe-editor.tsx` - Recipe editing form with dynamic fields
+- `components/recipe/recipe-collection.tsx` - User recipe collection grid with loading states
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction logic
 - `lib/ai/audio-transcription.ts` - Audio transcription service using Whisper API
@@ -130,17 +134,17 @@
   - [x] 7.10 Add proper HTTP status codes and error responses
   - [x] 7.11 Write unit tests for all API endpoints covering success cases, authentication failures, validation errors, and not found scenarios
 
-- [ ] 8.0 Create recipe UI components
-  - [ ] 8.1 Create `components/recipe/recipe-card.tsx` to display recipe with title, ingredients list, instructions list, and source link
-  - [ ] 8.2 Create `components/recipe/save-recipe-button.tsx` with save/unsave toggle functionality and authentication check
-  - [ ] 8.3 Implement optimistic UI updates for save/unsave actions with loading states
-  - [ ] 8.4 Create `components/recipe/recipe-editor.tsx` with form fields for editing title (text input), ingredients (dynamic list with add/remove), instructions (dynamic list with add/remove/reorder)
-  - [ ] 8.5 Implement form validation in recipe-editor using react-hook-form and Zod schema
-  - [ ] 8.6 Create `components/recipe/recipe-collection.tsx` to display user's saved recipes in a grid/list layout
-  - [ ] 8.7 Add loading skeletons and empty states for recipe components
-  - [ ] 8.8 Integrate Supabase auth context to check user authentication state in components
-  - [ ] 8.9 Add error handling and user feedback using toast notifications (sonner)
-  - [ ] 8.10 Ensure responsive design for all recipe components following existing Tailwind CSS patterns
+- [x] 8.0 Create recipe UI components
+  - [x] 8.1 Create `components/recipe/recipe-card.tsx` to display recipe with title, ingredients list, instructions list, and source link
+  - [x] 8.2 Create `components/recipe/save-recipe-button.tsx` with save/unsave toggle functionality and authentication check
+  - [x] 8.3 Implement optimistic UI updates for save/unsave actions with loading states
+  - [x] 8.4 Create `components/recipe/recipe-editor.tsx` with form fields for editing title (text input), ingredients (dynamic list with add/remove), instructions (dynamic list with add/remove/reorder)
+  - [x] 8.5 Implement form validation in recipe-editor using react-hook-form and Zod schema
+  - [x] 8.6 Create `components/recipe/recipe-collection.tsx` to display user's saved recipes in a grid/list layout
+  - [x] 8.7 Add loading skeletons and empty states for recipe components
+  - [x] 8.8 Integrate Supabase auth context to check user authentication state in components
+  - [x] 8.9 Add error handling and user feedback using toast notifications (sonner)
+  - [x] 8.10 Ensure responsive design for all recipe components following existing Tailwind CSS patterns
 
 - [ ] 9.0 Testing and validation
   - [ ] 9.1 Run all unit tests with `npm run test` and ensure all tests pass
