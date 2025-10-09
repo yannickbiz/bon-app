@@ -24,11 +24,8 @@ describe("database", () => {
           views: 1000,
         },
         hashtags: ["test"],
-        mentions: ["user"],
         timestamp: "2024-01-01T00:00:00.000Z",
         musicInfo: null,
-        location: "New York",
-        isVideo: true,
       };
 
       expect(content.platform).toBe("instagram");
@@ -58,15 +55,12 @@ describe("database", () => {
           views: null,
         },
         hashtags: [],
-        mentions: [],
         timestamp: null,
         musicInfo: {
           title: "Test Song",
           artist: "Test Artist",
           url: "https://music.example.com",
         },
-        location: null,
-        isVideo: true,
       };
 
       expect(content.title).toBeNull();

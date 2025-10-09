@@ -36,6 +36,7 @@ export default function RecipeCard({
           <h3 className="font-semibold mb-2">Ingredients</h3>
           <ul className="list-disc list-inside space-y-1">
             {recipe.ingredients.map((ingredient, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: ingredients are static strings
               <li key={index} className="text-sm">
                 {ingredient}
               </li>
@@ -49,6 +50,7 @@ export default function RecipeCard({
           <h3 className="font-semibold mb-2">Instructions</h3>
           <ol className="list-decimal list-inside space-y-2">
             {recipe.instructions.map((instruction, index) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: instructions are static strings
               <li key={index} className="text-sm">
                 {instruction}
               </li>

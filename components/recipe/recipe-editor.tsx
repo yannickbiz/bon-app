@@ -146,6 +146,7 @@ export default function RecipeEditor({
             </Button>
           </div>
           {form.watch("customIngredients").map((_, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: form fields with stable indices
             <div key={index} className="flex gap-2">
               <FormField
                 control={form.control}
@@ -187,6 +188,7 @@ export default function RecipeEditor({
             </Button>
           </div>
           {form.watch("customInstructions").map((_, index) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: form fields with stable indices
             <div key={index} className="flex gap-2">
               <FormField
                 control={form.control}
