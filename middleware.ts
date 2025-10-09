@@ -7,6 +7,7 @@ const publicRoutes = [
   "/verify",
   "/reset-password",
   "/auth/callback",
+  "/api/scraper",
 ];
 
 export async function middleware(request: NextRequest) {
