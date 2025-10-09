@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Moon, Sun, User } from "lucide-react";
+import { BookOpen, ChefHat, LogOut, Moon, Sun, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -104,6 +104,18 @@ export function Navbar() {
                     <Link href="/profile" className="cursor-pointer">
                       <User />
                       Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/all-recipes" className="cursor-pointer">
+                      <ChefHat />
+                      All Recipes
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/recipes" className="cursor-pointer">
+                      <BookOpen />
+                      My Recipes
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />

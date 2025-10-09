@@ -97,6 +97,16 @@ export default function Home() {
 
                 {result?.success && result.data && (
                   <div className="mt-6 space-y-4">
+                    <div className="p-4 bg-primary/10 border border-primary/20 rounded-md mb-4">
+                      <p className="text-sm">
+                        ✓ Content scraped successfully! AI recipe extraction is
+                        running in the background. Check the console or{" "}
+                        <a href="/recipes" className="underline font-medium">
+                          view recipes
+                        </a>{" "}
+                        in a few moments.
+                      </p>
+                    </div>
                     <div className="p-4 bg-muted rounded-md">
                       <h3 className="font-semibold mb-2">Scraped Data</h3>
                       <div className="space-y-2 text-sm">
