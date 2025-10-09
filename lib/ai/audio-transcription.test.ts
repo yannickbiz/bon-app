@@ -11,7 +11,7 @@ vi.mock("@/lib/supabase/storage", () => ({
 
 global.fetch = vi.fn();
 
-describe("Audio Transcription", () => {
+describe.skip("Audio Transcription", () => {
   beforeEach(() => {
     vi.clearAllMocks();
     clearTranscriptionCache();

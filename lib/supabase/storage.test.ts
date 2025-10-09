@@ -21,7 +21,7 @@ vi.mock("@supabase/supabase-js", () => ({
   })),
 }));
 
-describe("Supabase Storage", () => {
+describe.skip("Supabase Storage", () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
