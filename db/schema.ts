@@ -108,13 +108,6 @@ export const recipes = pgTable(
     scrapedContentId: integer("scraped_content_id")
       .references(() => scrapedContent.id)
       .notNull(),
-    originalData: jsonb("original_data")
-      .$type<{
-        title: string;
-        ingredients: string[];
-        instructions: string[];
-      }>()
-      .notNull(),
     confidence: numeric("confidence", { precision: 5, scale: 4 }),
     aiProvider: text("ai_provider"),
     transcription: text("transcription"),

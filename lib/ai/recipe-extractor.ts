@@ -60,7 +60,7 @@ Instructions:
 6. Combine information from captions and transcription if both are available.`;
 
     const result = await generateObject({
-      model: groq("llama-3.3-70b-versatile"),
+      model: groq("meta-llama/llama-4-maverick-17b-128e-instruct"),
       schema: recipeSchema,
       prompt,
     });
@@ -103,11 +103,6 @@ Instructions:
         ingredients: result.object.ingredients,
         instructions: result.object.instructions,
         scrapedContentId: 0,
-        originalData: {
-          title: result.object.title,
-          ingredients: result.object.ingredients,
-          instructions: result.object.instructions,
-        },
         confidence: confidence.toFixed(4),
         aiProvider: "groq",
         transcription: input.transcription,

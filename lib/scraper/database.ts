@@ -164,7 +164,6 @@ export async function upsertRecipe(
         ingredients: recipe.ingredients,
         instructions: recipe.instructions,
         scrapedContentId: recipe.scrapedContentId,
-        originalData: recipe.originalData,
         confidence: recipe.confidence,
         aiProvider: recipe.aiProvider,
         transcription: recipe.transcription,
@@ -201,11 +200,6 @@ export async function getRecipeByScrapedContentId(
     ingredients: row.ingredients as string[],
     instructions: row.instructions as string[],
     scrapedContentId: row.scrapedContentId,
-    originalData: row.originalData as {
-      title: string;
-      ingredients: string[];
-      instructions: string[];
-    },
     confidence: row.confidence,
     aiProvider: row.aiProvider,
     transcription: row.transcription,

@@ -36,11 +36,6 @@ export async function GET(
       ingredients: recipe[0].ingredients as string[],
       instructions: recipe[0].instructions as string[],
       scrapedContentId: recipe[0].scrapedContentId,
-      originalData: recipe[0].originalData as {
-        title: string;
-        ingredients: string[];
-        instructions: string[];
-      },
       confidence: recipe[0].confidence,
       aiProvider: recipe[0].aiProvider,
       transcription: recipe[0].transcription,

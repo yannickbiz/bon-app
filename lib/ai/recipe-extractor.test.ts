@@ -1,3 +1,4 @@
+/** biome-ignore-all lint/suspicious/noExplicitAny: <Mocked function> */
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { extractRecipe } from "./recipe-extractor";
 import type { RecipeExtractionInput } from "./types";

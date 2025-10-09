@@ -1,3 +1,5 @@
+import { db } from "@/db";
+import { userRecipes } from "@/db/schema";
 import {
   getRecipeByScrapedContentId,
   upsertRecipe,
@@ -26,6 +28,7 @@ export interface RecipeExtractionWorkflowResult {
 export async function extractRecipeFromScrapedContent(
   scrapedContentData: ScrapedContent,
   scrapedContentId: number,
+  userId?: string,
 ): Promise<RecipeExtractionWorkflowResult> {
   const startTime = Date.now();
   const filesToCleanup: string[] = [];
@@ -155,6 +158,17 @@ export async function extractRecipeFromScrapedContent(
         error: `Failed to save recipe: ${upsertError.message}`,
         transcriptionStatus,
       };
+    }
+
+    if (userId) {
+      try {
+        await db.insert(userRecipes).values({
+          userId,
+          recipeId,
+        });
+      } catch (error) {
+        console.error("Failed to auto-save recipe to user:", error);
+      }
     }
 
     return {

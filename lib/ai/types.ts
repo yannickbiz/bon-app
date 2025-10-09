@@ -12,11 +12,6 @@ export interface ExtractedRecipe {
   ingredients: string[];
   instructions: string[];
   scrapedContentId: number;
-  originalData: {
-    title: string;
-    ingredients: string[];
-    instructions: string[];
-  };
   confidence: string | null;
   aiProvider: string | null;
   transcription: string | null;
