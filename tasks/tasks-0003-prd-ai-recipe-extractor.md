@@ -2,6 +2,8 @@
 
 - `db/schema.ts` - Added recipes and user_recipes tables with constraints and indexes
 - `db/migrations/0002_flimsy_captain_marvel.sql` - Generated migration file for recipes schema
+- `.env.example` - Added AI recipe extraction environment variables
+- `package.json` - Added ai, @ai-sdk/groq, fluent-ffmpeg dependencies
 - `lib/ai/recipe-extractor.ts` - Core AI recipe extraction service
 - `lib/ai/recipe-extractor.test.ts` - Unit tests for recipe extraction logic
 - `lib/ai/audio-transcription.ts` - Audio transcription service using Whisper API
@@ -50,12 +52,12 @@
   - [x] 2.6 Review generated migration SQL file for correctness
   - [x] 2.7 Run migration using `npm run db:migrate` to apply schema changes to database
 
-- [ ] 3.0 Setup dependencies and environment configuration
-  - [ ] 3.1 Install Vercel AI SDK: `pnpm add ai @ai-sdk/groq`
-  - [ ] 3.2 Install audio processing dependencies: `pnpm add fluent-ffmpeg @types/fluent-ffmpeg`
-  - [ ] 3.3 Add environment variables to `.env`: GROQ_API_KEY, OPENAI_API_KEY (for Whisper), AI_PROVIDER (default: groq), MAX_VIDEO_DURATION_SECONDS (default: 300), SUPABASE_STORAGE_BUCKET (default: video-processing)
-  - [ ] 3.4 Create Supabase Storage bucket named `video-processing` with appropriate access policies (private bucket, authenticated access only for uploads)
-  - [ ] 3.5 Configure bucket lifecycle rules to auto-delete files older than 24 hours
+- [x] 3.0 Setup dependencies and environment configuration
+  - [x] 3.1 Install Vercel AI SDK: `pnpm add ai @ai-sdk/groq`
+  - [x] 3.2 Install audio processing dependencies: `pnpm add fluent-ffmpeg @types/fluent-ffmpeg`
+  - [x] 3.3 Add environment variables to `.env.example`: GROQ_API_KEY, OPENAI_API_KEY (for Whisper), AI_PROVIDER (default: groq), MAX_VIDEO_DURATION_SECONDS (default: 300), SUPABASE_STORAGE_BUCKET (default: video-processing)
+  - [x] 3.4 Create Supabase Storage bucket named `video-processing` with appropriate access policies (private bucket, authenticated access only for uploads)
+  - [x] 3.5 Configure bucket lifecycle rules to auto-delete files older than 24 hours
 
 - [ ] 4.0 Implement AI recipe extraction service from text content
   - [ ] 4.1 Create `lib/ai/types.ts` with TypeScript interfaces: RecipeExtractionResult, ExtractedRecipe, RecipeExtractionInput
