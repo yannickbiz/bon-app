@@ -61,7 +61,7 @@ describe("instagram-scraper", () => {
       const result = await scrapeInstagram("https://instagram.com/p/ABC123");
 
       expect(result.platform).toBe("instagram");
-      expect(result.postId).toBe("123456789");
+      expect(result.postId).toBe("ABC123");
       expect(result.title).toBe("Amazing photo! #test @user");
       expect(result.author.username).toBe("testuser");
       expect(result.hashtags).toContain("test");
@@ -117,7 +117,7 @@ describe("instagram-scraper", () => {
       const result = await scrapeInstagram("https://instagram.com/reel/XYZ789");
 
       expect(result.platform).toBe("instagram");
-      expect(result.postId).toBe("987654321");
+      expect(result.postId).toBe("XYZ789");
       expect(result.videoUrl).toBe("https://example.com/video.mp4");
       expect(result.coverImageUrl).toBe("https://example.com/cover.jpg");
     });
