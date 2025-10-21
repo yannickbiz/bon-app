@@ -93,7 +93,7 @@ describe("validateTodoText", () => {
 
     it("should accept text with exactly 501 characters trimmed to 500", () => {
       // If we add whitespace that gets trimmed, original might be 501 but trimmed is less
-      const text = " " + "a".repeat(499) + " ";
+      const text = ` ${"a".repeat(499)} `;
       const result = validateTodoText(text);
       expect(result.isValid).toBe(true);
     });

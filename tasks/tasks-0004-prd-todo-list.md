@@ -66,27 +66,27 @@
   - [x] 3.10 Write tests for server actions in `app/(protected)/todos/__tests__/actions.test.ts`
   - [x] 3.11 Ensure all server actions have proper error handling and return consistent response format
 
-- [ ] 4.0 UI components and page implementation
-  - [ ] 4.1 Create `app/(protected)/todos/page.tsx` as server component
-  - [ ] 4.2 Implement initial data loading in page.tsx using `getTodos()` action
-  - [ ] 4.3 Add page header with "My Todos" title
-  - [ ] 4.4 Create `app/(protected)/todos/components/todo-input.tsx` client component
-  - [ ] 4.5 Implement form with input field and submit button in todo-input.tsx
-  - [ ] 4.6 Add client-side validation and loading state to todo-input
-  - [ ] 4.7 Implement createTodo action call with optimistic update in todo-input
-  - [ ] 4.8 Create `app/(protected)/todos/components/todo-item.tsx` client component
-  - [ ] 4.9 Implement checkbox, todo text display, edit button, and delete button in todo-item
-  - [ ] 4.10 Add visual styling for completed todos (strikethrough, muted color)
-  - [ ] 4.11 Implement inline editing with Dialog component for edit functionality
-  - [ ] 4.12 Implement delete with confirmation and optimistic update
-  - [ ] 4.13 Implement toggle completion with optimistic update
-  - [ ] 4.14 Create `app/(protected)/todos/components/todo-list.tsx` client component
-  - [ ] 4.15 Implement Tabs component for filters (All, Active, Completed)
-  - [ ] 4.16 Add filtering logic based on selected tab
-  - [ ] 4.17 Implement empty state message when no todos match filter
-  - [ ] 4.18 Add loading skeleton states using Skeleton component
-  - [ ] 4.19 Integrate all components in page.tsx with proper data flow
-  - [ ] 4.20 Ensure responsive design works on mobile, tablet, and desktop
+- [x] 4.0 UI components and page implementation
+  - [x] 4.1 Create `app/(protected)/todos/page.tsx` as server component
+  - [x] 4.2 Implement initial data loading in page.tsx using `getTodos()` action
+  - [x] 4.3 Add page header with "My Todos" title
+  - [x] 4.4 Create `app/(protected)/todos/components/todo-input.tsx` client component
+  - [x] 4.5 Implement form with input field and submit button in todo-input.tsx
+  - [x] 4.6 Add client-side validation and loading state to todo-input
+  - [x] 4.7 Implement createTodo action call with optimistic update in todo-input
+  - [x] 4.8 Create `app/(protected)/todos/components/todo-item.tsx` client component
+  - [x] 4.9 Implement checkbox, todo text display, edit button, and delete button in todo-item
+  - [x] 4.10 Add visual styling for completed todos (strikethrough, muted color)
+  - [x] 4.11 Implement inline editing with Dialog component for edit functionality
+  - [x] 4.12 Implement delete with confirmation and optimistic update
+  - [x] 4.13 Implement toggle completion with optimistic update
+  - [x] 4.14 Create `app/(protected)/todos/components/todo-list.tsx` client component
+  - [x] 4.15 Implement Tabs component for filters (All, Active, Completed)
+  - [x] 4.16 Add filtering logic based on selected tab
+  - [x] 4.17 Implement empty state message when no todos match filter
+  - [x] 4.18 Add loading skeleton states using Skeleton component
+  - [x] 4.19 Integrate all components in page.tsx with proper data flow
+  - [x] 4.20 Ensure responsive design works on mobile, tablet, and desktop
 
 - [ ] 5.0 Testing implementation
   - [ ] 5.1 Write tests for todo-input component in `__tests__/todo-input.test.tsx`

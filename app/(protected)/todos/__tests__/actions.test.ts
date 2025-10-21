@@ -1,7 +1,5 @@
-import { eq } from "drizzle-orm";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { db } from "@/db";
-import { todos } from "@/db/schema";
 import { createClient } from "@/lib/supabase/server";
 import { createTodo, deleteTodo, getTodos, updateTodo } from "../actions";
 
