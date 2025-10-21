@@ -43,7 +43,7 @@
   - [x] 1.2 Create a new branch named `feature/0004-todo-list`
   - [x] 1.3 Verify the branch was created successfully
 
-- [ ] 2.0 Database schema and migration setup
+- [x] 2.0 Database schema and migration setup
   - [x] 2.1 Add `todos` table to `db/schema.ts` with all required fields (id, user_id, text, completed, created_at, updated_at)
   - [x] 2.2 Add foreign key relationship to profiles table on user_id
   - [x] 2.3 Add index on user_id for query performance
@@ -53,18 +53,18 @@
   - [x] 2.7 Run `pnpm db:migrate` to apply migration to database
   - [x] 2.8 Verify table was created successfully (can use `pnpm db:studio` to inspect)
 
-- [ ] 3.0 Server actions implementation
-  - [ ] 3.1 Create `types/todos.ts` with TypeScript interfaces (Todo, CreateTodoInput, UpdateTodoInput, TodoFilter)
-  - [ ] 3.2 Create `lib/todos/validation.ts` with validation functions
-  - [ ] 3.3 Write tests for validation logic in `lib/todos/__tests__/validation.test.ts` (TDD approach)
-  - [ ] 3.4 Implement validation logic to pass tests (text length 1-500, no whitespace-only)
-  - [ ] 3.5 Create `app/(protected)/todos/actions.ts` file
-  - [ ] 3.6 Implement `createTodo(text: string)` server action with auth check and validation
-  - [ ] 3.7 Implement `getTodos(filter?: TodoFilter)` server action with auth check and filtering
-  - [ ] 3.8 Implement `updateTodo(id: string, updates: UpdateTodoInput)` server action with auth and ownership check
-  - [ ] 3.9 Implement `deleteTodo(id: string)` server action with auth and ownership check
-  - [ ] 3.10 Write tests for server actions in `app/(protected)/todos/__tests__/actions.test.ts`
-  - [ ] 3.11 Ensure all server actions have proper error handling and return consistent response format
+- [x] 3.0 Server actions implementation
+  - [x] 3.1 Create `types/todos.ts` with TypeScript interfaces (Todo, CreateTodoInput, UpdateTodoInput, TodoFilter)
+  - [x] 3.2 Create `lib/todos/validation.ts` with validation functions
+  - [x] 3.3 Write tests for validation logic in `lib/todos/__tests__/validation.test.ts` (TDD approach)
+  - [x] 3.4 Implement validation logic to pass tests (text length 1-500, no whitespace-only)
+  - [x] 3.5 Create `app/(protected)/todos/actions.ts` file
+  - [x] 3.6 Implement `createTodo(text: string)` server action with auth check and validation
+  - [x] 3.7 Implement `getTodos(filter?: TodoFilter)` server action with auth check and filtering
+  - [x] 3.8 Implement `updateTodo(id: string, updates: UpdateTodoInput)` server action with auth and ownership check
+  - [x] 3.9 Implement `deleteTodo(id: string)` server action with auth and ownership check
+  - [x] 3.10 Write tests for server actions in `app/(protected)/todos/__tests__/actions.test.ts`
+  - [x] 3.11 Ensure all server actions have proper error handling and return consistent response format
 
 - [ ] 4.0 UI components and page implementation
   - [ ] 4.1 Create `app/(protected)/todos/page.tsx` as server component
