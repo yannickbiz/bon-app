@@ -246,8 +246,8 @@ describe("LoginPage", () => {
 
     await waitFor(() => {
       expect(screen.getByRole("button", { name: "Sending..." })).toBeTruthy();
+      expect(magicLinkEmail).toHaveProperty("disabled", true);
     });
-    expect(magicLinkEmail).toHaveProperty("disabled", true);
 
     await waitFor(() => {
       expect(
