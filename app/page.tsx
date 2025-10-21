@@ -76,7 +76,9 @@ export default function HomePage() {
               <CardContent>
                 <form onSubmit={handleSubmit} className="flex gap-4">
                   <div className="space-y-2 flex-1">
-                    <Label htmlFor="url">URL</Label>
+                    <Label htmlFor="url" hidden>
+                      URL
+                    </Label>
                     <Input
                       id="url"
                       type="text"
