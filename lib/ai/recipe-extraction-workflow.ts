@@ -142,7 +142,6 @@ export async function extractRecipeFromScrapedContent(
       ingredients: extractionResult.data.ingredients,
       instructions: extractionResult.data.instructions,
       scrapedContentId,
-      originalData: extractionResult.data.originalData,
       confidence: extractionResult.data.confidence,
       aiProvider: extractionResult.data.aiProvider,
       transcription: extractionResult.transcription,

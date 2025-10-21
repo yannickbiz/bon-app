@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Email validation schema
 export const emailSchema = z.object({
-  email: z.email({ message: "Please enter a valid email address" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
 });
 
 // Password validation schema with custom rules
@@ -25,13 +25,13 @@ export const magicLinkSchema = emailSchema;
 
 // Email/password login schema
 export const loginSchema = z.object({
-  email: z.email({ message: "Please enter a valid email address" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   password: z.string().min(1, { message: "Password is required" }),
 });
 
 // Signup schema with full password validation
 export const signupSchema = z.object({
-  email: z.email({ message: "Please enter a valid email address" }),
+  email: z.string().email({ message: "Please enter a valid email address" }),
   password: passwordSchema,
 });
 
