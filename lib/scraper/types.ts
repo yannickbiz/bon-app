@@ -34,6 +34,7 @@ export interface ScraperResponse {
   success: boolean;
   data: ScrapedContent | null;
   error: string | null;
+  recipeId?: string | null;
 }
 
 export interface ScraperRequestBody {

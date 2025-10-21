@@ -1,12 +1,14 @@
 import {
-  boolean,
+  index,
   integer,
   jsonb,
+  numeric,
   pgEnum,
   pgTable,
   serial,
   text,
   timestamp,
+  unique,
   uuid,
 } from "drizzle-orm/pg-core";
 
@@ -95,3 +97,45 @@ export const scrapingLogs = pgTable("scraping_logs", {
 
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
+
+export const recipes = pgTable(
+  "recipes",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    title: text("title").notNull(),
+    ingredients: jsonb("ingredients").$type<string[]>().notNull(),
+    instructions: jsonb("instructions").$type<string[]>().notNull(),
+    scrapedContentId: integer("scraped_content_id")
+      .references(() => scrapedContent.id)
+      .notNull(),
+    confidence: numeric("confidence", { precision: 5, scale: 4 }),
+    aiProvider: text("ai_provider"),
+    transcription: text("transcription"),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (table) => ({
+    uniqueScrapedContent: unique().on(table.scrapedContentId),
+  }),
+);
+
+export const userRecipes = pgTable(
+  "user_recipes",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id")
+      .references(() => profiles.id)
+      .notNull(),
+    recipeId: uuid("recipe_id")
+      .references(() => recipes.id)
+      .notNull(),
+    customTitle: text("custom_title"),
+    customIngredients: jsonb("custom_ingredients").$type<string[]>(),
+    customInstructions: jsonb("custom_instructions").$type<string[]>(),
+    savedAt: timestamp("saved_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (table) => ({
+    userRecipeIdx: index("user_recipe_idx").on(table.userId, table.recipeId),
+  }),
+);

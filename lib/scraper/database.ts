@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import { db } from "@/db";
-import { scrapedContent, scrapingLogs } from "@/db/schema";
+import { recipes, scrapedContent, scrapingLogs } from "@/db/schema";
+import type { ExtractedRecipe } from "@/lib/ai/types";
 import type { PlatformType, ScrapedContent, ScrapeStatus } from "./types";
 
 export async function getCachedContent(
@@ -21,10 +22,10 @@ export async function getCachedContent(
 
 export async function upsertScrapedContent(
   content: ScrapedContent,
-): Promise<void> {
+): Promise<{ id: number }> {
   const dbData = transformScrapedContentToDb(content);
 
-  await db
+  const result = await db
     .insert(scrapedContent)
     .values(dbData)
     .onConflictDoUpdate({
@@ -33,7 +34,10 @@ export async function upsertScrapedContent(
         ...dbData,
         updatedAt: new Date(),
       },
-    });
+    })
+    .returning({ id: scrapedContent.id });
+
+  return { id: result[0].id };
 }
 
 export interface FailedScrapeLog {
@@ -120,5 +124,86 @@ function transformScrapedContentToDb(content: ScrapedContent) {
     hashtags: content.hashtags,
     postTimestamp: content.timestamp ? new Date(content.timestamp) : null,
     musicInfo: content.musicInfo,
+  };
+}
+
+export async function getScrapedContentById(
+  id: number,
+): Promise<ScrapedContent | null> {
+  const result = await db
+    .select()
+    .from(scrapedContent)
+    .where(eq(scrapedContent.id, id))
+    .limit(1);
+
+  if (result.length === 0) {
+    return null;
+  }
+
+  return transformDbToScrapedContent(result[0]);
+}
+
+export async function upsertRecipe(
+  recipe: Omit<ExtractedRecipe, "id" | "createdAt" | "updatedAt">,
+): Promise<{ id: string; error: Error | null }> {
+  try {
+    const existingRecipe = await db
+      .select()
+      .from(recipes)
+      .where(eq(recipes.scrapedContentId, recipe.scrapedContentId))
+      .limit(1);
+
+    if (existingRecipe.length > 0) {
+      return { id: existingRecipe[0].id, error: null };
+    }
+
+    const result = await db
+      .insert(recipes)
+      .values({
+        title: recipe.title,
+        ingredients: recipe.ingredients,
+        instructions: recipe.instructions,
+        scrapedContentId: recipe.scrapedContentId,
+        confidence: recipe.confidence,
+        aiProvider: recipe.aiProvider,
+        transcription: recipe.transcription,
+      })
+      .returning({ id: recipes.id });
+
+    return { id: result[0].id, error: null };
+  } catch (error) {
+    return {
+      id: "",
+      error:
+        error instanceof Error ? error : new Error("Failed to upsert recipe"),
+    };
+  }
+}
+
+export async function getRecipeByScrapedContentId(
+  scrapedContentId: number,
+): Promise<ExtractedRecipe | null> {
+  const result = await db
+    .select()
+    .from(recipes)
+    .where(eq(recipes.scrapedContentId, scrapedContentId))
+    .limit(1);
+
+  if (result.length === 0) {
+    return null;
+  }
+
+  const row = result[0];
+  return {
+    id: row.id,
+    title: row.title,
+    ingredients: row.ingredients as string[],
+    instructions: row.instructions as string[],
+    scrapedContentId: row.scrapedContentId,
+    confidence: row.confidence,
+    aiProvider: row.aiProvider,
+    transcription: row.transcription,
+    createdAt: row.createdAt.toISOString(),
+    updatedAt: row.updatedAt.toISOString(),
   };
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut, Moon, Sun, User } from "lucide-react";
+import { BookOpen, ChefHat, LogOut, Moon, Sun, User } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -71,6 +71,16 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-2">
               <span className="text-xl font-bold">Bon App</span>
             </Link>
+            {user && (
+              <div className="hidden md:flex items-center gap-1">
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/all-recipes">
+                    <ChefHat className="h-4 w-4 mr-2" />
+                    All Recipes
+                  </Link>
+                </Button>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2">
@@ -104,6 +114,12 @@ export function Navbar() {
                     <Link href="/profile" className="cursor-pointer">
                       <User />
                       Profile
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link href="/recipes" className="cursor-pointer">
+                      <BookOpen />
+                      My Recipes
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />

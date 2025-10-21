@@ -1,19 +1,16 @@
 import { type NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
-import {
-  getCachedContent,
-  logFailedScrape,
-  upsertScrapedContent,
-} from "@/lib/scraper/database";
+import { extractRecipeFromScrapedContent } from "@/lib/ai/recipe-extraction-workflow";
+import { logFailedScrape, upsertScrapedContent } from "@/lib/scraper/database";
 import { scrapeInstagram } from "@/lib/scraper/instagram-scraper";
 import { checkRateLimit } from "@/lib/scraper/rate-limiter";
 import { scrapeTikTok } from "@/lib/scraper/tiktok-scraper";
 import type { ScraperResponse } from "@/lib/scraper/types";
 import { validateUrl } from "@/lib/scraper/url-validator";
+import { createClient } from "@/lib/supabase/server";
 
 const requestSchema = z.object({
   url: z.string().min(1),
-  force: z.boolean().optional(),
 });
 
 export async function POST(request: NextRequest) {
@@ -27,14 +24,13 @@ export async function POST(request: NextRequest) {
       {
         success: false,
         data: null,
-        error:
-          "Invalid request body. Expected { url: string, force?: boolean }",
+        error: "Invalid request body. Expected { url: string }",
       } satisfies ScraperResponse,
       { status: 400 },
     );
   }
 
-  const { url, force = false } = requestBody;
+  const { url } = requestBody;
 
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0] ??
@@ -80,37 +76,55 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!force) {
-    try {
-      const cached = await getCachedContent(url);
-      if (cached) {
-        return NextResponse.json(
-          {
-            success: true,
-            data: cached,
-            error: null,
-          } satisfies ScraperResponse,
-          {
-            status: 200,
-            headers: {
-              "X-RateLimit-Remaining": rateLimit.remaining.toString(),
-              "X-RateLimit-Reset": rateLimit.reset,
-            },
-          },
-        );
-      }
-    } catch (error) {
-      console.error("Cache lookup error:", error);
-    }
-  }
-
   try {
     const scrapedData =
       platform === "instagram"
         ? await scrapeInstagram(url)
         : await scrapeTikTok(url);
 
-    await upsertScrapedContent(scrapedData);
+    const { id: scrapedContentId } = await upsertScrapedContent(scrapedData);
+
+    console.log("Scrape successful:", {
+      url,
+      platform,
+      scrapedContentId,
+      scrapeDurationMs: Date.now() - startTime,
+    });
+
+    const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    const extractionResult = await extractRecipeFromScrapedContent(
+      scrapedData,
+      scrapedContentId,
+      user?.id,
+    );
+
+    if (extractionResult.success) {
+      console.log(
+        `Recipe extracted successfully: ${extractionResult.recipeId} (${extractionResult.processingTimeMs}ms)`,
+      );
+
+      return NextResponse.json(
+        {
+          success: true,
+          data: scrapedData,
+          error: null,
+          recipeId: extractionResult.recipeId,
+        } satisfies ScraperResponse,
+        {
+          status: 200,
+          headers: {
+            "X-RateLimit-Remaining": rateLimit.remaining.toString(),
+            "X-RateLimit-Reset": rateLimit.reset,
+          },
+        },
+      );
+    }
+
+    console.error(`Recipe extraction failed: ${extractionResult.error}`);
 
     return NextResponse.json(
       {
