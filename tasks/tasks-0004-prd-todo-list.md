@@ -38,20 +38,20 @@
 
 ## Tasks
 
-- [ ] 1.0 Create feature branch
+- [x] 1.0 Create feature branch
   - [x] 1.1 Ensure you're on the main branch and pull latest changes
   - [x] 1.2 Create a new branch named `feature/0004-todo-list`
   - [x] 1.3 Verify the branch was created successfully
 
 - [ ] 2.0 Database schema and migration setup
-  - [ ] 2.1 Add `todos` table to `db/schema.ts` with all required fields (id, user_id, text, completed, created_at, updated_at)
-  - [ ] 2.2 Add foreign key relationship to profiles table on user_id
-  - [ ] 2.3 Add index on user_id for query performance
-  - [ ] 2.4 Add index on created_at for ordering
-  - [ ] 2.5 Run `pnpm db:generate` to create migration files
-  - [ ] 2.6 Review generated migration SQL for correctness
-  - [ ] 2.7 Run `pnpm db:migrate` to apply migration to database
-  - [ ] 2.8 Verify table was created successfully (can use `pnpm db:studio` to inspect)
+  - [x] 2.1 Add `todos` table to `db/schema.ts` with all required fields (id, user_id, text, completed, created_at, updated_at)
+  - [x] 2.2 Add foreign key relationship to profiles table on user_id
+  - [x] 2.3 Add index on user_id for query performance
+  - [x] 2.4 Add index on created_at for ordering
+  - [x] 2.5 Run `pnpm db:generate` to create migration files
+  - [x] 2.6 Review generated migration SQL for correctness
+  - [x] 2.7 Run `pnpm db:migrate` to apply migration to database
+  - [x] 2.8 Verify table was created successfully (can use `pnpm db:studio` to inspect)
 
 - [ ] 3.0 Server actions implementation
   - [ ] 3.1 Create `types/todos.ts` with TypeScript interfaces (Todo, CreateTodoInput, UpdateTodoInput, TodoFilter)
