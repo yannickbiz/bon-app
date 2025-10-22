@@ -2,7 +2,7 @@
 
 import { Search, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useOptimistic, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
@@ -26,71 +26,52 @@ export function NoteList({
 }: NoteListProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
-  const [optimisticNotes, setOptimisticNotes] = useOptimistic(
-    initialNotes,
-    (state: Note[], action: { type: string; note?: Note; id?: string }) => {
-      switch (action.type) {
-        case "add":
-          return action.note ? [action.note, ...state] : state;
-        case "update":
-          return action.note
-            ? state
-                .map((n) => (n.id === action.note?.id ? action.note : n))
-                .sort((a, b) => {
-                  // Sort by pinned first, then by updated date
-                  if (a.isPinned && !b.isPinned) return -1;
-                  if (!a.isPinned && b.isPinned) return 1;
-                  return (
-                    new Date(b.updatedAt).getTime() -
-                    new Date(a.updatedAt).getTime()
-                  );
-                })
-            : state;
-        case "delete":
-          return state.filter((n) => n.id !== action.id);
-        default:
-          return state;
-      }
-    },
-  );
+  const [notes, setNotes] = useState<Note[]>(initialNotes);
+
+  // Sync with parent when initialNotes changes
+  useEffect(() => {
+    setNotes(initialNotes);
+  }, [initialNotes]);
 
   const handleNoteCreated = (note: Note) => {
-    setOptimisticNotes({ type: "add", note });
+    const newNotes = [note, ...notes];
+    setNotes(newNotes);
     onNoteSelect(note);
     // Notify parent of the change
     if (onNotesChange) {
-      onNotesChange([note, ...initialNotes]);
+      onNotesChange(newNotes);
     }
   };
 
   const handleNoteUpdated = (note: Note) => {
-    setOptimisticNotes({ type: "update", note });
+    const updatedNotes = notes
+      .map((n) => (n.id === note.id ? note : n))
+      .sort((a, b) => {
+        // Sort by pinned first, then by updated date
+        if (a.isPinned && !b.isPinned) return -1;
+        if (!a.isPinned && b.isPinned) return 1;
+        return (
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        );
+      });
+    setNotes(updatedNotes);
     // Notify parent of the change
     if (onNotesChange) {
-      const updatedNotes = initialNotes
-        .map((n) => (n.id === note.id ? note : n))
-        .sort((a, b) => {
-          // Sort by pinned first, then by updated date
-          if (a.isPinned && !b.isPinned) return -1;
-          if (!a.isPinned && b.isPinned) return 1;
-          return (
-            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-          );
-        });
       onNotesChange(updatedNotes);
     }
   };
 
   const handleNoteDeleted = (id: string) => {
-    setOptimisticNotes({ type: "delete", id });
+    const filteredNotes = notes.filter((n) => n.id !== id);
+    setNotes(filteredNotes);
     // Notify parent of the change
     if (onNotesChange) {
-      onNotesChange(initialNotes.filter((n) => n.id !== id));
+      onNotesChange(filteredNotes);
     }
   };
 
   // Filter notes based on search query
-  const filteredNotes = optimisticNotes.filter((note) => {
+  const filteredNotes = notes.filter((note) => {
     if (!searchQuery) return true;
     const query = searchQuery.toLowerCase();
     return (
@@ -99,7 +80,7 @@ export function NoteList({
     );
   });
 
-  if (optimisticNotes.length === 0) {
+  if (notes.length === 0) {
     return (
       <div className="h-full flex flex-col">
         <div className="p-4 space-y-4">
