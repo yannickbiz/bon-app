@@ -1,4 +1,5 @@
 import {
+  boolean,
   index,
   integer,
   jsonb,
@@ -137,5 +138,23 @@ export const userRecipes = pgTable(
   },
   (table) => ({
     userRecipeIdx: index("user_recipe_idx").on(table.userId, table.recipeId),
+  }),
+);
+
+export const todos = pgTable(
+  "todos",
+  {
+    id: uuid("id").defaultRandom().primaryKey(),
+    userId: uuid("user_id")
+      .references(() => profiles.id)
+      .notNull(),
+    text: text("text").notNull(),
+    completed: boolean("completed").notNull().default(false),
+    createdAt: timestamp("created_at").defaultNow().notNull(),
+    updatedAt: timestamp("updated_at").defaultNow().notNull(),
+  },
+  (table) => ({
+    userIdIdx: index("todos_user_id_idx").on(table.userId),
+    createdAtIdx: index("todos_created_at_idx").on(table.createdAt),
   }),
 );

@@ -1,6 +1,14 @@
 "use client";
 
-import { BookOpen, ChefHat, LogOut, Moon, Sun, User } from "lucide-react";
+import {
+  BookOpen,
+  ChefHat,
+  ListTodo,
+  LogOut,
+  Moon,
+  Sun,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
@@ -77,6 +85,12 @@ export function Navbar() {
                   <Link href="/all-recipes">
                     <ChefHat className="h-4 w-4 mr-2" />
                     All Recipes
+                  </Link>
+                </Button>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/todos">
+                    <ListTodo className="h-4 w-4 mr-2" />
+                    Todos
                   </Link>
                 </Button>
               </div>
