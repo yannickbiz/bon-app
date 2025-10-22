@@ -129,6 +129,10 @@ export default function NotesPage() {
     }
   };
 
+  const handleNotesChange = (updatedNotes: Note[]) => {
+    setNotes(updatedNotes);
+  };
+
   if (isLoading) {
     return (
       <div className="h-screen flex">
@@ -161,6 +165,7 @@ export default function NotesPage() {
           initialNotes={notes}
           selectedNoteId={selectedNote?.id}
           onNoteSelect={handleNoteSelect}
+          onNotesChange={handleNotesChange}
         />
       </div>
 

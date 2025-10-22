@@ -15,12 +15,14 @@ type NoteListProps = {
   initialNotes: Note[];
   selectedNoteId?: string;
   onNoteSelect: (note: Note) => void;
+  onNotesChange?: (notes: Note[]) => void;
 };
 
 export function NoteList({
   initialNotes,
   selectedNoteId,
   onNoteSelect,
+  onNotesChange,
 }: NoteListProps) {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -55,14 +57,36 @@ export function NoteList({
   const handleNoteCreated = (note: Note) => {
     setOptimisticNotes({ type: "add", note });
     onNoteSelect(note);
+    // Notify parent of the change
+    if (onNotesChange) {
+      onNotesChange([note, ...initialNotes]);
+    }
   };
 
   const handleNoteUpdated = (note: Note) => {
     setOptimisticNotes({ type: "update", note });
+    // Notify parent of the change
+    if (onNotesChange) {
+      const updatedNotes = initialNotes
+        .map((n) => (n.id === note.id ? note : n))
+        .sort((a, b) => {
+          // Sort by pinned first, then by updated date
+          if (a.isPinned && !b.isPinned) return -1;
+          if (!a.isPinned && b.isPinned) return 1;
+          return (
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+          );
+        });
+      onNotesChange(updatedNotes);
+    }
   };
 
   const handleNoteDeleted = (id: string) => {
     setOptimisticNotes({ type: "delete", id });
+    // Notify parent of the change
+    if (onNotesChange) {
+      onNotesChange(initialNotes.filter((n) => n.id !== id));
+    }
   };
 
   // Filter notes based on search query
