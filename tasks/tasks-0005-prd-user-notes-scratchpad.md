@@ -114,26 +114,26 @@
   - [x] 5.12 Implement trash page with list of deleted notes, restore, and permanent delete actions
   - [x] 5.13 Add navigation link/button to access trash from main notes page
 
-- [ ] 6.0 Add advanced features (search, pin, trash, auto-save)
-  - [ ] 6.1 Create `lib/notes/markdown.ts` with sanitizeMarkdown() function to prevent XSS
-  - [ ] 6.2 Write tests in `lib/notes/__tests__/markdown.test.ts` for XSS prevention
-  - [ ] 6.3 Add search input to top of note-list component
-  - [ ] 6.4 Implement client-side search filtering by title and content (case-insensitive)
-  - [ ] 6.5 Add debouncing to search input (300ms delay) using useDebouncedCallback
-  - [ ] 6.6 Implement auto-save in note-editor using debounced callback (2 seconds after typing stops)
-  - [ ] 6.7 Add optimistic updates to note-editor - update UI immediately, sync with server asynchronously
-  - [ ] 6.8 Show save-indicator status during auto-save process
-  - [ ] 6.9 Handle auto-save errors with toast notification and retry option (use Sonner)
-  - [ ] 6.10 Implement pin/unpin functionality with optimistic updates in note-item
-  - [ ] 6.11 Ensure notes list re-sorts when pin status changes (pinned notes at top)
-  - [ ] 6.12 Add duplicate note functionality to note-item with toast confirmation
-  - [ ] 6.13 Implement soft delete confirmation dialog in note-item
-  - [ ] 6.14 Update note-list to exclude deleted notes from main view
-  - [ ] 6.15 Run markdown tests: `pnpm test lib/notes/__tests__/markdown.test.ts`
+- [x] 6.0 Add advanced features (search, pin, trash, auto-save)
+  - [x] 6.1 Create `lib/notes/markdown.ts` with sanitizeMarkdown() function to prevent XSS
+  - [x] 6.2 Write tests in `lib/notes/__tests__/markdown.test.ts` for XSS prevention
+  - [x] 6.3 Add search input to top of note-list component
+  - [x] 6.4 Implement client-side search filtering by title and content (case-insensitive)
+  - [x] 6.5 Add debouncing to search input (300ms delay) using useDebouncedCallback
+  - [x] 6.6 Implement auto-save in note-editor using debounced callback (2 seconds after typing stops)
+  - [x] 6.7 Add optimistic updates to note-editor - update UI immediately, sync with server asynchronously
+  - [x] 6.8 Show save-indicator status during auto-save process
+  - [x] 6.9 Handle auto-save errors with toast notification and retry option (use Sonner)
+  - [x] 6.10 Implement pin/unpin functionality with optimistic updates in note-item
+  - [x] 6.11 Ensure notes list re-sorts when pin status changes (pinned notes at top)
+  - [x] 6.12 Add duplicate note functionality to note-item with toast confirmation
+  - [x] 6.13 Implement soft delete confirmation dialog in note-item
+  - [x] 6.14 Update note-list to exclude deleted notes from main view
+  - [x] 6.15 Run markdown tests: `pnpm test lib/notes/__tests__/markdown.test.ts`
 
-- [ ] 7.0 Integrate notes navigation link and keyboard shortcuts
-  - [ ] 7.1 Open `components/navigation/navbar.tsx` and add "Notes" link to navigation items
-  - [ ] 7.2 Position Notes link appropriately in navbar (after Todos, before Profile)
+- [x] 7.0 Integrate notes navigation link and keyboard shortcuts
+  - [x] 7.1 Open `components/navigation/navbar.tsx` and add "Notes" link to navigation items
+  - [x] 7.2 Position Notes link appropriately in navbar (after Todos, before Profile)
   - [ ] 7.3 Create `hooks/use-keyboard-shortcut.ts` hook for keyboard shortcut handling
   - [ ] 7.4 Implement Ctrl/Cmd+K keyboard shortcut to navigate to notes page or focus search
   - [ ] 7.5 Add keyboard shortcut listener to notes page component

@@ -3,6 +3,7 @@
 import {
   BookOpen,
   ChefHat,
+  FileText,
   ListTodo,
   LogOut,
   Moon,
@@ -91,6 +92,12 @@ export function Navbar() {
                   <Link href="/todos">
                     <ListTodo className="h-4 w-4 mr-2" />
                     Todos
+                  </Link>
+                </Button>
+                <Button variant="ghost" size="sm" asChild>
+                  <Link href="/notes">
+                    <FileText className="h-4 w-4 mr-2" />
+                    Notes
                   </Link>
                 </Button>
               </div>
