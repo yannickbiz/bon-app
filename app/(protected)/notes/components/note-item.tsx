@@ -87,7 +87,7 @@ export function NoteItem({
     return preview.length < content.length ? `${preview}...` : preview;
   };
 
-  const formatDate = (date: Date) => {
+  const formatDate = (date: string) => {
     const now = new Date();
     const noteDate = new Date(date);
     const diffMs = now.getTime() - noteDate.getTime();

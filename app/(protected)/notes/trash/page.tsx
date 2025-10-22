@@ -74,7 +74,7 @@ export default function TrashPage() {
     });
   };
 
-  const formatDate = (date: Date | null) => {
+  const formatDate = (date: string | null) => {
     if (!date) return "Unknown";
     return new Date(date).toLocaleDateString([], {
       month: "short",

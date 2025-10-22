@@ -5,9 +5,9 @@ export type Note = {
   content: string;
   isPinned: boolean;
   isDeleted: boolean;
-  deletedAt: Date | null;
-  createdAt: Date;
-  updatedAt: Date;
+  deletedAt: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateNoteInput = {

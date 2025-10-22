@@ -56,9 +56,9 @@ export async function getNotes(): Promise<NoteActionResult<Note[]>> {
         content: note.content,
         isPinned: note.isPinned,
         isDeleted: note.isDeleted,
-        deletedAt: note.deletedAt,
-        createdAt: note.createdAt,
-        updatedAt: note.updatedAt,
+        deletedAt: note.deletedAt ? note.deletedAt.toISOString() : null,
+        createdAt: note.createdAt.toISOString(),
+        updatedAt: note.updatedAt.toISOString(),
       })),
     };
   } catch (error) {
@@ -107,9 +107,9 @@ export async function getNote(id: string): Promise<NoteActionResult<Note>> {
         content: note.content,
         isPinned: note.isPinned,
         isDeleted: note.isDeleted,
-        deletedAt: note.deletedAt,
-        createdAt: note.createdAt,
-        updatedAt: note.updatedAt,
+        deletedAt: note.deletedAt ? note.deletedAt.toISOString() : null,
+        createdAt: note.createdAt.toISOString(),
+        updatedAt: note.updatedAt.toISOString(),
       },
     };
   } catch (error) {
@@ -180,9 +180,9 @@ export async function createNote(
         content: newNote.content,
         isPinned: newNote.isPinned,
         isDeleted: newNote.isDeleted,
-        deletedAt: newNote.deletedAt,
-        createdAt: newNote.createdAt,
-        updatedAt: newNote.updatedAt,
+        deletedAt: newNote.deletedAt ? newNote.deletedAt.toISOString() : null,
+        createdAt: newNote.createdAt.toISOString(),
+        updatedAt: newNote.updatedAt.toISOString(),
       },
     };
   } catch (error) {
@@ -281,9 +281,11 @@ export async function updateNote(
         content: updatedNote.content,
         isPinned: updatedNote.isPinned,
         isDeleted: updatedNote.isDeleted,
-        deletedAt: updatedNote.deletedAt,
-        createdAt: updatedNote.createdAt,
-        updatedAt: updatedNote.updatedAt,
+        deletedAt: updatedNote.deletedAt
+          ? updatedNote.deletedAt.toISOString()
+          : null,
+        createdAt: updatedNote.createdAt.toISOString(),
+        updatedAt: updatedNote.updatedAt.toISOString(),
       },
     };
   } catch (error) {
@@ -400,9 +402,11 @@ export async function togglePinNote(
         content: updatedNote.content,
         isPinned: updatedNote.isPinned,
         isDeleted: updatedNote.isDeleted,
-        deletedAt: updatedNote.deletedAt,
-        createdAt: updatedNote.createdAt,
-        updatedAt: updatedNote.updatedAt,
+        deletedAt: updatedNote.deletedAt
+          ? updatedNote.deletedAt.toISOString()
+          : null,
+        createdAt: updatedNote.createdAt.toISOString(),
+        updatedAt: updatedNote.updatedAt.toISOString(),
       },
     };
   } catch (error) {
@@ -481,9 +485,9 @@ export async function duplicateNote(
         content: newNote.content,
         isPinned: newNote.isPinned,
         isDeleted: newNote.isDeleted,
-        deletedAt: newNote.deletedAt,
-        createdAt: newNote.createdAt,
-        updatedAt: newNote.updatedAt,
+        deletedAt: newNote.deletedAt ? newNote.deletedAt.toISOString() : null,
+        createdAt: newNote.createdAt.toISOString(),
+        updatedAt: newNote.updatedAt.toISOString(),
       },
     };
   } catch (error) {
@@ -525,9 +529,9 @@ export async function getTrashedNotes(): Promise<NoteActionResult<Note[]>> {
         content: note.content,
         isPinned: note.isPinned,
         isDeleted: note.isDeleted,
-        deletedAt: note.deletedAt,
-        createdAt: note.createdAt,
-        updatedAt: note.updatedAt,
+        deletedAt: note.deletedAt ? note.deletedAt.toISOString() : null,
+        createdAt: note.createdAt.toISOString(),
+        updatedAt: note.updatedAt.toISOString(),
       })),
     };
   } catch (error) {
@@ -591,9 +595,11 @@ export async function restoreNote(id: string): Promise<NoteActionResult<Note>> {
         content: restoredNote.content,
         isPinned: restoredNote.isPinned,
         isDeleted: restoredNote.isDeleted,
-        deletedAt: restoredNote.deletedAt,
-        createdAt: restoredNote.createdAt,
-        updatedAt: restoredNote.updatedAt,
+        deletedAt: restoredNote.deletedAt
+          ? restoredNote.deletedAt.toISOString()
+          : null,
+        createdAt: restoredNote.createdAt.toISOString(),
+        updatedAt: restoredNote.updatedAt.toISOString(),
       },
     };
   } catch (error) {
