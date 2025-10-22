@@ -138,6 +138,7 @@ export function NoteList({
               onNoteClick={onNoteSelect}
               onNoteUpdated={handleNoteUpdated}
               onNoteDeleted={handleNoteDeleted}
+              onNoteCreated={handleNoteCreated}
             />
           ))
         )}

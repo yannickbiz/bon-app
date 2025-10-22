@@ -28,6 +28,7 @@ type NoteItemProps = {
   onNoteClick: (note: Note) => void;
   onNoteUpdated: (note: Note) => void;
   onNoteDeleted: (id: string) => void;
+  onNoteCreated?: (note: Note) => void;
 };
 
 export function NoteItem({
@@ -36,6 +37,7 @@ export function NoteItem({
   onNoteClick,
   onNoteUpdated,
   onNoteDeleted,
+  onNoteCreated,
 }: NoteItemProps) {
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
   const [isPending, startTransition] = useTransition();
@@ -60,7 +62,10 @@ export function NoteItem({
       const result = await duplicateNote(note.id);
 
       if (result.success && result.data) {
-        onNoteUpdated(result.data);
+        // Notify parent about the new note
+        if (onNoteCreated) {
+          onNoteCreated(result.data);
+        }
         toast.success("Note duplicated successfully!");
       } else {
         toast.error(result.error || "Failed to duplicate note");
