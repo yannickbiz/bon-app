@@ -134,19 +134,19 @@
   }
 
   .dark .prose {
-    --tw-prose-body: hsl(var(--foreground));
-    --tw-prose-headings: hsl(var(--foreground));
-    --tw-prose-lead: hsl(var(--foreground));
-    --tw-prose-links: hsl(var(--primary));
-    --tw-prose-bold: hsl(var(--foreground));
-    --tw-prose-counters: hsl(var(--muted-foreground));
-    --tw-prose-bullets: hsl(var(--muted-foreground));
+    --tw-prose-body: #fff;
+    --tw-prose-headings: #fff;
+    --tw-prose-lead: #fff;
+    --tw-prose-links: #fff;
+    --tw-prose-bold: #fff;
+    --tw-prose-counters: #fff;
+    --tw-prose-bullets: #fff;
     --tw-prose-hr: hsl(var(--border));
-    --tw-prose-quotes: hsl(var(--foreground));
+    --tw-prose-quotes: #fff;
     --tw-prose-quote-borders: hsl(var(--border));
-    --tw-prose-captions: hsl(var(--muted-foreground));
-    --tw-prose-code: hsl(var(--foreground));
-    --tw-prose-pre-code: hsl(var(--foreground));
+    --tw-prose-captions: #fff;
+    --tw-prose-code: #fff;
+    --tw-prose-pre-code: #fff;
     --tw-prose-pre-bg: hsl(var(--muted));
     --tw-prose-th-borders: hsl(var(--border));
     --tw-prose-td-borders: hsl(var(--border));
