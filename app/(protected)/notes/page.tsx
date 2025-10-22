@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Note } from "@/types/notes";
-import { getNotes, updateNote } from "./actions";
+import { createNote, getNotes, updateNote } from "./actions";
 import { EmptyState } from "./components/empty-state";
 import { NoteEditor } from "./components/note-editor";
 import { NoteList } from "./components/note-list";
@@ -115,6 +115,20 @@ export default function NotesPage() {
     debouncedSave(updates);
   };
 
+  const handleCreateNote = async () => {
+    const result = await createNote({ title: "Untitled Note", content: "" });
+
+    if (result.success && result.data) {
+      // Add new note to the list
+      setNotes((prev) => [result.data!, ...prev]);
+      // Select the new note
+      setSelectedNote(result.data);
+      toast.success("Note created successfully");
+    } else {
+      toast.error(result.error || "Failed to create note");
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="h-screen flex">
@@ -134,7 +148,7 @@ export default function NotesPage() {
   if (notes.length === 0) {
     return (
       <div className="h-screen flex flex-col">
-        <EmptyState onCreateNote={() => {}} />
+        <EmptyState onCreateNote={handleCreateNote} />
       </div>
     );
   }
