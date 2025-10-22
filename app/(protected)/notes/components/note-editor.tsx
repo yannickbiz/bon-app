@@ -91,7 +91,7 @@ export function NoteEditor({
       {/* Editor / Preview */}
       <div className="flex-1 overflow-hidden">
         {showPreview ? (
-          <div className="h-full overflow-y-auto p-4 prose prose-sm dark:prose-invert max-w-none">
+          <div className="h-full overflow-y-auto p-4 prose prose-sm max-w-none text-foreground">
             {content ? (
               <ReactMarkdown remarkPlugins={[remarkGfm]}>
                 {content}
