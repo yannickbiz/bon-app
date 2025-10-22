@@ -10,7 +10,8 @@ import { NoteEditor } from "./components/note-editor";
 import { NoteList } from "./components/note-list";
 
 // Debounce utility
-function useDebounce<T extends (...args: unknown[]) => unknown>(
+// biome-ignore lint/suspicious/noExplicitAny: Generic utility needs any for flexibility
+function useDebounce<T extends (...args: any[]) => any>(
   callback: T,
   delay: number,
 ) {
