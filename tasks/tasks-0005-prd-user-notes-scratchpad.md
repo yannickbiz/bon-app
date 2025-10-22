@@ -65,23 +65,23 @@
   - [x] 2.6 Run migration using `pnpm db:migrate` to apply schema changes
   - [x] 2.7 Verify table creation in database using `pnpm db:studio`
 
-- [ ] 3.0 Create types, validation, and server actions for note operations
-  - [ ] 3.1 Create `types/notes.ts` with Note type, NoteActionResult<T>, CreateNoteInput, UpdateNoteInput types
-  - [ ] 3.2 Create `lib/notes/validation.ts` with validateNoteTitle and validateNoteContent functions
-  - [ ] 3.3 Write tests in `lib/notes/__tests__/validation.test.ts` for validation edge cases (empty, too long, special characters)
-  - [ ] 3.4 Create `app/(protected)/notes/actions.ts` with "use server" directive
-  - [ ] 3.5 Implement getNotes() server action - fetch all non-deleted notes for current user, sorted by pinned then updated_at
-  - [ ] 3.6 Implement getNote(id: string) server action - fetch single note with ownership verification
-  - [ ] 3.7 Implement createNote(input: CreateNoteInput) server action - validate, insert, and return new note
-  - [ ] 3.8 Implement updateNote(id: string, input: UpdateNoteInput) server action - validate ownership, update title/content/is_pinned
-  - [ ] 3.9 Implement deleteNote(id: string) server action - soft delete (set is_deleted=true, deleted_at=now)
-  - [ ] 3.10 Implement togglePinNote(id: string) server action - toggle is_pinned status
-  - [ ] 3.11 Implement duplicateNote(id: string) server action - create copy with " - Copy" appended to title
-  - [ ] 3.12 Implement getTrashedNotes() server action - fetch deleted notes for trash view
-  - [ ] 3.13 Implement restoreNote(id: string) server action - restore from trash (set is_deleted=false, deleted_at=null)
-  - [ ] 3.14 Implement permanentlyDeleteNote(id: string) server action - hard delete from database
-  - [ ] 3.15 Add revalidatePath calls to all mutating actions for cache invalidation
-  - [ ] 3.16 Run validation tests: `pnpm test lib/notes/__tests__/validation.test.ts`
+- [x] 3.0 Create types, validation, and server actions for note operations
+  - [x] 3.1 Create `types/notes.ts` with Note type, NoteActionResult<T>, CreateNoteInput, UpdateNoteInput types
+  - [x] 3.2 Create `lib/notes/validation.ts` with validateNoteTitle and validateNoteContent functions
+  - [x] 3.3 Write tests in `lib/notes/__tests__/validation.test.ts` for validation edge cases (empty, too long, special characters)
+  - [x] 3.4 Create `app/(protected)/notes/actions.ts` with "use server" directive
+  - [x] 3.5 Implement getNotes() server action - fetch all non-deleted notes for current user, sorted by pinned then updated_at
+  - [x] 3.6 Implement getNote(id: string) server action - fetch single note with ownership verification
+  - [x] 3.7 Implement createNote(input: CreateNoteInput) server action - validate, insert, and return new note
+  - [x] 3.8 Implement updateNote(id: string, input: UpdateNoteInput) server action - validate ownership, update title/content/is_pinned
+  - [x] 3.9 Implement deleteNote(id: string) server action - soft delete (set is_deleted=true, deleted_at=now)
+  - [x] 3.10 Implement togglePinNote(id: string) server action - toggle is_pinned status
+  - [x] 3.11 Implement duplicateNote(id: string) server action - create copy with " - Copy" appended to title
+  - [x] 3.12 Implement getTrashedNotes() server action - fetch deleted notes for trash view
+  - [x] 3.13 Implement restoreNote(id: string) server action - restore from trash (set is_deleted=false, deleted_at=null)
+  - [x] 3.14 Implement permanentlyDeleteNote(id: string) server action - hard delete from database
+  - [x] 3.15 Add revalidatePath calls to all mutating actions for cache invalidation
+  - [x] 3.16 Run validation tests: `pnpm test lib/notes/__tests__/validation.test.ts`
 
 - [ ] 4.0 Implement core UI components (note list, note editor, note item)
   - [ ] 4.1 Create `app/(protected)/notes/components/empty-state.tsx` - display when no notes exist with "Create your first note" CTA
