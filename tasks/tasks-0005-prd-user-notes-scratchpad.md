@@ -99,20 +99,20 @@
   - [x] 4.13 Apply theme-aware styling to all components (support light/dark themes)
   - [x] 4.14 Ensure responsive design for mobile (<768px) - stack components vertically
 
-- [ ] 5.0 Build notes page with two-panel layout and routing
-  - [ ] 5.1 Create `app/(protected)/notes/page.tsx` as server component
-  - [ ] 5.2 Fetch initial notes data using getNotes() server action
-  - [ ] 5.3 Implement two-panel layout: left panel (30% width) for note list, right panel (70% width) for editor
-  - [ ] 5.4 Make layout responsive: side-by-side on desktop (>768px), stacked on mobile with back button
-  - [ ] 5.5 Add note-list component to left panel with initial notes data
-  - [ ] 5.6 Add note-editor component to right panel with selected note state management
-  - [ ] 5.7 Implement note selection logic - clicking note in list opens it in editor
-  - [ ] 5.8 Add "Create Note" button at top of left panel using note-input component
-  - [ ] 5.9 Handle empty state - show empty-state component when no notes exist
-  - [ ] 5.10 Add loading skeletons for initial page load (use shadcn Skeleton component)
-  - [ ] 5.11 Create `app/(protected)/notes/trash/page.tsx` for trash view
-  - [ ] 5.12 Implement trash page with list of deleted notes, restore, and permanent delete actions
-  - [ ] 5.13 Add navigation link/button to access trash from main notes page
+- [x] 5.0 Build notes page with two-panel layout and routing
+  - [x] 5.1 Create `app/(protected)/notes/page.tsx` as server component
+  - [x] 5.2 Fetch initial notes data using getNotes() server action
+  - [x] 5.3 Implement two-panel layout: left panel (30% width) for note list, right panel (70% width) for editor
+  - [x] 5.4 Make layout responsive: side-by-side on desktop (>768px), stacked on mobile with back button
+  - [x] 5.5 Add note-list component to left panel with initial notes data
+  - [x] 5.6 Add note-editor component to right panel with selected note state management
+  - [x] 5.7 Implement note selection logic - clicking note in list opens it in editor
+  - [x] 5.8 Add "Create Note" button at top of left panel using note-input component
+  - [x] 5.9 Handle empty state - show empty-state component when no notes exist
+  - [x] 5.10 Add loading skeletons for initial page load (use shadcn Skeleton component)
+  - [x] 5.11 Create `app/(protected)/notes/trash/page.tsx` for trash view
+  - [x] 5.12 Implement trash page with list of deleted notes, restore, and permanent delete actions
+  - [x] 5.13 Add navigation link/button to access trash from main notes page
 
 - [ ] 6.0 Add advanced features (search, pin, trash, auto-save)
   - [ ] 6.1 Create `lib/notes/markdown.ts` with sanitizeMarkdown() function to prevent XSS
