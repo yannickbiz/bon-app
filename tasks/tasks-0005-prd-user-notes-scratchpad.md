@@ -83,21 +83,21 @@
   - [x] 3.15 Add revalidatePath calls to all mutating actions for cache invalidation
   - [x] 3.16 Run validation tests: `pnpm test lib/notes/__tests__/validation.test.ts`
 
-- [ ] 4.0 Implement core UI components (note list, note editor, note item)
-  - [ ] 4.1 Create `app/(protected)/notes/components/empty-state.tsx` - display when no notes exist with "Create your first note" CTA
-  - [ ] 4.2 Create `app/(protected)/notes/components/note-item.tsx` - display note title, preview (first 100 chars), timestamp, pin indicator
-  - [ ] 4.3 Add click handler to note-item for selecting/opening note in editor
-  - [ ] 4.4 Add pin/unpin button to note-item with icon toggle
-  - [ ] 4.5 Add delete button to note-item with confirmation dialog (using shadcn Dialog)
-  - [ ] 4.6 Create `app/(protected)/notes/components/note-input.tsx` - dialog or inline form to create new note with title input
-  - [ ] 4.7 Create `app/(protected)/notes/components/note-editor.tsx` - markdown editor with title input and content textarea
-  - [ ] 4.8 Add markdown preview toggle to note-editor (use react-markdown for rendering)
-  - [ ] 4.9 Add syntax highlighting to code blocks in preview (use react-syntax-highlighter)
-  - [ ] 4.10 Create `app/(protected)/notes/components/save-indicator.tsx` - show "Saving...", "Saved at [time]", or "Error saving"
-  - [ ] 4.11 Integrate save-indicator into note-editor component
-  - [ ] 4.12 Add duplicate note action to note-item dropdown menu or button
-  - [ ] 4.13 Apply theme-aware styling to all components (support light/dark themes)
-  - [ ] 4.14 Ensure responsive design for mobile (<768px) - stack components vertically
+- [x] 4.0 Implement core UI components (note list, note editor, note item)
+  - [x] 4.1 Create `app/(protected)/notes/components/empty-state.tsx` - display when no notes exist with "Create your first note" CTA
+  - [x] 4.2 Create `app/(protected)/notes/components/note-item.tsx` - display note title, preview (first 100 chars), timestamp, pin indicator
+  - [x] 4.3 Add click handler to note-item for selecting/opening note in editor
+  - [x] 4.4 Add pin/unpin button to note-item with icon toggle
+  - [x] 4.5 Add delete button to note-item with confirmation dialog (using shadcn Dialog)
+  - [x] 4.6 Create `app/(protected)/notes/components/note-input.tsx` - dialog or inline form to create new note with title input
+  - [x] 4.7 Create `app/(protected)/notes/components/note-editor.tsx` - markdown editor with title input and content textarea
+  - [x] 4.8 Add markdown preview toggle to note-editor (use react-markdown for rendering)
+  - [x] 4.9 Add syntax highlighting to code blocks in preview (use react-syntax-highlighter)
+  - [x] 4.10 Create `app/(protected)/notes/components/save-indicator.tsx` - show "Saving...", "Saved at [time]", or "Error saving"
+  - [x] 4.11 Integrate save-indicator into note-editor component
+  - [x] 4.12 Add duplicate note action to note-item dropdown menu or button
+  - [x] 4.13 Apply theme-aware styling to all components (support light/dark themes)
+  - [x] 4.14 Ensure responsive design for mobile (<768px) - stack components vertically
 
 - [ ] 5.0 Build notes page with two-panel layout and routing
   - [ ] 5.1 Create `app/(protected)/notes/page.tsx` as server component
