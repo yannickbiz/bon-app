@@ -105,9 +105,17 @@ export function NoteItem({
 
   return (
     <>
-      <button
-        type="button"
+      {/* biome-ignore lint/a11y/useSemanticElements: Cannot use button here as it contains nested button (dropdown menu trigger) */}
+      <div
         onClick={() => onNoteClick(note)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onNoteClick(note);
+          }
+        }}
+        role="button"
+        tabIndex={0}
         className={`
           w-full text-left p-3 border rounded-lg cursor-pointer transition-colors
           hover:bg-accent
@@ -176,7 +184,7 @@ export function NoteItem({
         <p className="text-xs text-muted-foreground">
           {formatDate(note.updatedAt)}
         </p>
-      </button>
+      </div>
 
       <Dialog open={isDeleteOpen} onOpenChange={setIsDeleteOpen}>
         <DialogContent onClick={(e) => e.stopPropagation()}>
